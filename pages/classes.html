@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes — Blue Fin Swim School — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="home.html">Activity<span>Bookr</span></a>
+        <div class="nav-links">
+          <a class="nav-link" href="home.html">Home</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="pricing.html">Pricing</a>
+          <a class="nav-link  active" href="classes.html">Classes</a>
+        </div>
+        <div class="nav-actions">
+          <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
+          <a class="nav-cta" href="register.html">Get Started</a>
+          <div class="nav-hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a class="mobile-menu-link" href="home.html">Home</a>
+    <a class="mobile-menu-link" href="about.html">About</a>
+    <a class="mobile-menu-link" href="pricing.html">Pricing</a>
+    <a class="mobile-menu-link" href="classes.html">Classes</a>
+    <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+  </div>
+
+  <section class="classes-page-hero">
+    <div class="container">
+      <div class="classes-hero-inner">
+        <div>
+          <div class="section-label" style="margin-bottom:12px">Blue Fin Swim School</div>
+          <h1 class="page-hero-title" style="margin-bottom:12px">Browse <em>classes</em></h1>
+          <p class="page-hero-sub" style="margin-bottom:0">Filter by day or time. We'll flag nap-time conflicts
+            automatically.</p>
+        </div>
+        <div class="classes-hero-info">
+          <div class="classes-info-pill"><span class="classes-info-num">4</span><span class="classes-info-label">Max per
+              class</span></div>
+          <div class="classes-info-pill"><span class="classes-info-num">30m</span><span class="classes-info-label">Per
+              lesson</span></div>
+          <div class="classes-info-pill"><span class="classes-info-num">R120</span><span class="classes-info-label">Per
+              lesson</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar-wrap">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="filter-group">
+          <div class="filter-label">Day</div>
+          <div class="chip-scroll" id="day-filters">
+            <button class="filter-chip active" data-day="all">All days</button>
+            <button class="filter-chip" data-day="Mon">Mon</button>
+            <button class="filter-chip" data-day="Tue">Tue</button>
+            <button class="filter-chip" data-day="Wed">Wed</button>
+            <button class="filter-chip" data-day="Thu">Thu</button>
+            <button class="filter-chip" data-day="Fri">Fri</button>
+            <button class="filter-chip" data-day="Sat">Sat</button>
+          </div>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-group">
+          <div class="filter-label">Time</div>
+          <div class="chip-scroll" id="time-filters">
+            <button class="filter-chip active" data-time="all">Any time</button>
+            <button class="filter-chip" data-time="morning">Morning</button>
+            <button class="filter-chip" data-time="afternoon">Afternoon</button>
+          </div>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-group">
+          <div class="filter-label">Show</div>
+          <div class="chip-scroll">
+            <button class="filter-chip active" id="avail-toggle">All classes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="nap-notice" id="nap-notice">
+      <div class="nap-notice-icon">🌙</div>
+      <div class="nap-notice-text"><strong>Amara's nap times:</strong> 9:00–10:30 AM and 1:00–2:30 PM. Classes that
+        overlap are marked — you can still book any slot.</div>
+      <button class="nap-notice-dismiss" id="nap-dismiss">×</button>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:80px">
+    <div class="classes-results-bar">
+      <div class="classes-count" id="classes-count"></div>
+      <div class="classes-legend">
+        <span class="legend-item"><span class="legend-dot legend-available"></span>Available</span>
+        <span class="legend-item"><span class="legend-dot legend-nearly"></span>Almost full</span>
+        <span class="legend-item"><span class="legend-dot legend-full"></span>Full</span>
+        <span class="legend-item"><span class="legend-dot legend-nap"></span>Nap conflict</span>
+      </div>
+    </div>
+    <div id="classes-list"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a class="footer-logo" href="home.html"
+            style="color:inherit;text-decoration:none">Activity<span>Bookr</span></a>
+          <p class="footer-desc">Online booking for Blue Fin Swim School, Durban.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigate</div>
+          <a class="footer-link" href="home.html">Home</a>
+          <a class="footer-link" href="about.html">About</a>
+          <a class="footer-link" href="pricing.html">Pricing</a>
+          <a class="footer-link" href="classes.html">Classes</a>
+        </div>
+        <div>
+          <div class="footer-col-title">Account</div>
+          <a class="footer-link" href="register.html">Create Account</a>
+          <a class="footer-link" href="login.html">Log In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Blue Fin Swim School · Powered by ActivityBookr</div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" id="toast"></div>
+  <script src="../js/app.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/classes.js"></script>
+</body>
+
+</html>

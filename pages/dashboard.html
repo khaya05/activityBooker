@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="home.html">Activity<span>Bookr</span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="home.html">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="pricing.html">Pricing</a>
+        <a class="nav-link" href="classes.html">Classes</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-cta" href="dashboard.html">Dashboard</a>
+        <div class="nav-hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a class="mobile-menu-link" href="home.html">Home</a>
+  <a class="mobile-menu-link" href="classes.html">Classes</a>
+  <a class="mobile-menu-link" href="purchase.html">Buy Lessons</a>
+  <a class="mobile-menu-link" href="add-child.html">Add Child</a>
+</div>
+
+<div class="container" style="max-width:860px;padding-top:52px;padding-bottom:80px">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:40px">
+    <div>
+      <div class="section-label" style="margin-bottom:8px">Parent dashboard</div>
+      <h1 class="page-hero-title" style="font-size:clamp(24px,4vw,36px);margin-bottom:0">
+        Welcome back, <em id="dash-name">there</em>
+      </h1>
+    </div>
+    <a class="btn btn-primary" href="classes.html">+ Book a class</a>
+  </div>
+
+  <!-- Balance card -->
+  <div class="dash-balance-card">
+    <div>
+      <div class="dash-balance-label">Lesson balance</div>
+      <div class="dash-balance-num" id="dash-balance">0</div>
+      <div class="dash-balance-sub" id="dash-balance-child">lessons remaining</div>
+    </div>
+    <a class="btn-white-sm" href="purchase.html">Buy lessons →</a>
+  </div>
+
+  <!-- Upcoming bookings -->
+  <div class="dash-section-title" style="margin-top:40px;margin-bottom:16px">
+    Upcoming bookings
+  </div>
+  <div id="bookings-list"></div>
+
+  <!-- Quick links -->
+  <div class="dash-section-title" style="margin-top:40px;margin-bottom:16px">
+    Quick links
+  </div>
+  <div class="dash-quick-links">
+    <a class="dash-quick-link" href="classes.html">
+      <img src="../assets/person-swimming-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+      <span class="dql-label">Browse classes</span>
+    </a>
+    <a class="dash-quick-link" href="purchase.html">
+      <img src="../assets/credit-card-regular-full.svg" alt="" srcset="" style="height: 2.5rem;">
+      <span class="dql-label">Buy lessons</span>
+    </a>
+    <a class="dash-quick-link" href="add-child.html">
+      <img src="../assets/baby-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+      <span class="dql-label">Add child</span>
+    </a>
+    <a class="dash-quick-link" href="pricing.html">
+      <img src="../assets/clipboard-list-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+      <span class="dql-label">View pricing</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Blue Fin Swim School · Powered by ActivityBookr</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/app.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

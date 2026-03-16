@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — Blue Fin Swim School — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="home.html">Activity<span>Bookr</span></a>
+        <div class="nav-links">
+          <a class="nav-link" href="home.html">Home</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link  active" href="pricing.html">Pricing</a>
+          <a class="nav-link" href="classes.html">Classes</a>
+        </div>
+        <div class="nav-actions">
+          <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
+          <a class="nav-cta" href="register.html">Get Started</a>
+          <div class="nav-hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a class="mobile-menu-link" href="home.html">Home</a>
+    <a class="mobile-menu-link" href="about.html">About</a>
+    <a class="mobile-menu-link" href="pricing.html">Pricing</a>
+    <a class="mobile-menu-link" href="classes.html">Classes</a>
+    <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+  </div>
+
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="section-label">Lesson packs</div>
+      <h1 class="pricing-hero-title">Simple, <em>transparent</em> pricing</h1>
+      <p class="pricing-hero-sub">Buy lessons upfront, book whenever suits your schedule. The more you commit, the less
+        each lesson costs.</p>
+    </div>
+  </section>
+
+  <section class="pricing-section">
+    <div class="container">
+      <div class="packs-grid">
+        <div class="pack-card animate">
+          <div class="pack-name">Trial</div>
+          <div class="pack-price">R95</div>
+          <div class="pack-per">one-time · new families only</div>
+          <div class="pack-saving">First lesson</div>
+          <div class="pack-features">
+            <div class="pack-feature">1 × 30-minute lesson</div>
+            <div class="pack-feature">Any available class slot</div>
+            <div class="pack-feature">Full refund if not satisfied</div>
+            <div class="pack-feature">No commitment required</div>
+          </div>
+          <div class="pack-cta"><a class="btn btn-outline" style="width:100%;display:flex;justify-content:center"
+              href="register.html">Get started</a></div>
+        </div>
+        <div class="pack-card animate" style="animation-delay:.1s">
+          <div class="pack-name">Single Lesson</div>
+          <div class="pack-price">R120</div>
+          <div class="pack-per">per lesson</div>
+          <div class="pack-saving">Pay as you go</div>
+          <div class="pack-features">
+            <div class="pack-feature">1 × 30-minute lesson</div>
+            <div class="pack-feature">Any available class slot</div>
+            <div class="pack-feature">Cancel up to 24hrs before</div>
+          </div>
+          <div class="pack-cta"><a class="btn btn-outline" style="width:100%;display:flex;justify-content:center"
+              href="purchase.html">Buy 1 lesson</a></div>
+        </div>
+        <div class="pack-card featured animate" style="animation-delay:.2s">
+          <div class="pack-badge">Most Popular</div>
+          <div class="pack-name">4-Lesson Pack</div>
+          <div class="pack-price">R440</div>
+          <div class="pack-per">R110 per lesson</div>
+          <div class="pack-saving">Save R40 vs single</div>
+          <div class="pack-features">
+            <div class="pack-feature">4 × 30-minute lessons</div>
+            <div class="pack-feature">Any available class slot</div>
+            <div class="pack-feature">Valid for 8 weeks</div>
+            <div class="pack-feature">Cancel up to 24hrs before</div>
+          </div>
+          <div class="pack-cta"><a class="btn btn-primary"
+              style="width:100%;display:flex;justify-content:center;background:white;color:var(--ink)"
+              href="purchase.html">Buy 4 lessons</a></div>
+        </div>
+        <div class="pack-card animate" style="animation-delay:.3s">
+          <div class="pack-name">8-Lesson Pack</div>
+          <div class="pack-price">R800</div>
+          <div class="pack-per">R100 per lesson</div>
+          <div class="pack-saving">Save R160 vs single</div>
+          <div class="pack-features">
+            <div class="pack-feature">8 × 30-minute lessons</div>
+            <div class="pack-feature">Any available class slot</div>
+            <div class="pack-feature">Valid for 16 weeks</div>
+            <div class="pack-feature">Cancel up to 24hrs before</div>
+            <div class="pack-feature">Best value per lesson</div>
+          </div>
+          <div class="pack-cta"><a class="btn btn-outline" style="width:100%;display:flex;justify-content:center"
+              href="purchase.html">Buy 8 lessons</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-packs">
+    <div class="container">
+      <div class="how-packs-inner">
+        <div class="section-label">How lesson packs work</div>
+        <h3 class="how-packs-title">Buy once, book anytime</h3>
+        <p class="how-packs-sub">Lessons are purchased upfront and added to your balance. Use them to book any available
+          class slot — no need to pay each time you book.</p>
+        <div class="how-packs-steps">
+          <div class="how-pack-step">
+            <div class="how-pack-step-num">1</div>
+            <div>
+              <div class="how-pack-step-title">Choose a pack</div>
+              <div class="how-pack-step-text">Pay securely via Stripe. Card details never stored by us.</div>
+            </div>
+          </div>
+          <div class="how-pack-step">
+            <div class="how-pack-step-num">2</div>
+            <div>
+              <div class="how-pack-step-title">Lessons added to balance</div>
+              <div class="how-pack-step-text">Lessons appear in your account immediately. View your balance anytime from
+                your dashboard.</div>
+            </div>
+          </div>
+          <div class="how-pack-step">
+            <div class="how-pack-step-num">3</div>
+            <div>
+              <div class="how-pack-step-title">Book &amp; lessons deduct</div>
+              <div class="how-pack-step-text">Confirm a booking and one lesson is deducted. Cancel 24 hours before and
+                it's returned automatically.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:80px 0">
+    <div class="container">
+      <div class="section-label">Our policies</div>
+      <h2 class="section-title" style="margin-top:10px">Fair and transparent</h2>
+      <div class="policy-grid">
+        <div class="policy-card animate"><img src="../assets/alarm-clock-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+          <div class="policy-card-title">Cancellation</div>
+          <div class="policy-card-text">Cancel up to <strong>24 hours</strong> before and your lesson is returned to
+            your balance.</div>
+        </div>
+        <div class="policy-card animate" style="animation-delay:.1s"><img src="../assets/calendar-days-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+          <div class="policy-card-title">Pack expiry</div>
+          <div class="policy-card-text">Trial &amp; single: 4 weeks. 4-pack: 8 weeks. 8-pack: 16 weeks.</div>
+        </div>
+        <div class="policy-card animate" style="animation-delay:.2s"><img src="../assets/money-bill-1-wave-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+          <div class="policy-card-title">Refunds</div>
+          <div class="policy-card-text">Trial lessons are fully refundable if you're not satisfied after your first
+            class.</div>
+        </div>
+        <div class="policy-card animate" style="animation-delay:.3s"><img src="../assets/key-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+          <div class="policy-card-title">Secure payments</div>
+          <div class="policy-card-text">All payments processed by Stripe. PCI-DSS compliant. Receipts emailed
+            automatically.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-cta">
+    <div class="container">
+      <div class="home-cta-inner">
+        <div>
+          <h2 class="home-cta-title">Start with a <em>trial lesson</em> for R95</h2>
+          <p class="home-cta-sub">No commitment. Full refund if you're not satisfied after your first class.</p>
+        </div>
+        <div class="home-cta-actions"><a class="btn-white" href="register.html">Create account</a><a class="btn-ghost"
+            href="classes.html">Browse classes</a></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a class="footer-logo" href="home.html"
+            style="color:inherit;text-decoration:none">Activity<span>Bookr</span></a>
+          <p class="footer-desc">Online booking for Blue Fin Swim School, Durban.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigate</div>
+          <a class="footer-link" href="home.html">Home</a>
+          <a class="footer-link" href="about.html">About</a>
+          <a class="footer-link" href="pricing.html">Pricing</a>
+          <a class="footer-link" href="classes.html">Classes</a>
+        </div>
+        <div>
+          <div class="footer-col-title">Account</div>
+          <a class="footer-link" href="register.html">Create Account</a>
+          <a class="footer-link" href="login.html">Log In</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Blue Fin Swim School · Powered by ActivityBookr</div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" id="toast"></div>
+  <script src="../js/app.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/pricing.js"></script>
+</body>
+
+</html>

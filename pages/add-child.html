@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Child — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="intake-layout">
+
+  <!-- ── Dark sidebar (desktop) ─────────────────────────── -->
+  <aside class="intake-sidebar">
+    <a class="intake-sidebar-logo" href="home.html">Activity<span>Bookr</span></a>
+
+    <div class="intake-progress-title">Adding a child</div>
+
+    <nav class="intake-steps-nav">
+      <div class="intake-step-nav active" id="snav-1" onclick="goTo(1)">
+        <div class="intake-step-nav-circle active" id="snavc-1">1</div>
+        <div>
+          <div class="intake-step-nav-label">Child details</div>
+          <div class="intake-step-nav-sub">Name, DOB &amp; experience</div>
+        </div>
+      </div>
+      <div class="intake-step-connector"></div>
+      <div class="intake-step-nav" id="snav-2" onclick="goTo(2)">
+        <div class="intake-step-nav-circle" id="snavc-2">2</div>
+        <div>
+          <div class="intake-step-nav-label">Nap times</div>
+          <div class="intake-step-nav-sub">Optional scheduling help</div>
+        </div>
+      </div>
+      <div class="intake-step-connector"></div>
+      <div class="intake-step-nav" id="snav-3" onclick="goTo(3)">
+        <div class="intake-step-nav-circle" id="snavc-3">3</div>
+        <div>
+          <div class="intake-step-nav-label">Health &amp; safety</div>
+          <div class="intake-step-nav-sub">Medical notes</div>
+        </div>
+      </div>
+      <div class="intake-step-connector"></div>
+      <div class="intake-step-nav" id="snav-4" onclick="goTo(4)">
+        <div class="intake-step-nav-circle" id="snavc-4">4</div>
+        <div>
+          <div class="intake-step-nav-label">Review &amp; save</div>
+          <div class="intake-step-nav-sub">Confirm profile</div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="intake-sidebar-help">
+      <div class="intake-help-icon">💡</div>
+      <div class="intake-help-text">Your child won't be able to book until a consent form is signed with the school.</div>
+    </div>
+  </aside>
+
+  <!-- ── Main content ───────────────────────────────────── -->
+  <main class="intake-main">
+
+    <!-- Mobile step dots -->
+    <div class="intake-mobile-steps">
+      <div class="intake-mobile-step active" id="mstep-1">1</div>
+      <div class="intake-mobile-connector"></div>
+      <div class="intake-mobile-step" id="mstep-2">2</div>
+      <div class="intake-mobile-connector"></div>
+      <div class="intake-mobile-step" id="mstep-3">3</div>
+      <div class="intake-mobile-connector"></div>
+      <div class="intake-mobile-step" id="mstep-4">4</div>
+    </div>
+
+    <!-- ── Step 1: Child details ──────────────────────── -->
+    <div class="intake-step-panel active" id="panel-1">
+      <div class="intake-panel-header">
+        <div class="intake-panel-step-label">Step 1 of 4</div>
+        <h2 class="intake-panel-title">Tell us about your child</h2>
+        <p class="intake-panel-sub">This helps us place them in the right class and keep them safe.</p>
+      </div>
+
+      <div class="form-fields">
+        <div class="form-field">
+          <label class="form-label">Child's first name</label>
+          <input class="form-input" type="text" id="child-first" placeholder="e.g. Amara" autocomplete="off">
+          <div class="form-error" id="err-first"></div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Child's last name</label>
+          <input class="form-input" type="text" id="child-last" placeholder="e.g. Mokoena" autocomplete="off">
+          <div class="form-error" id="err-last"></div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Date of birth</label>
+          <input class="form-input" type="date" id="child-dob">
+          <div class="form-error" id="err-dob"></div>
+          <div id="age-display" style="display:none;margin-top:8px">
+            <span class="child-age-chip" id="age-chip"></span>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">
+            Gender
+            <span style="font-weight:400;color:var(--ink-5);text-transform:none;letter-spacing:0;font-size:10px">optional</span>
+          </label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="child-gender" value="girl">
+              <span class="radio-card-inner">
+                <span class="radio-card-emoji">👧</span>
+                <span class="radio-card-label">Girl</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="child-gender" value="boy">
+              <span class="radio-card-inner">
+                <span class="radio-card-emoji">👦</span>
+                <span class="radio-card-label">Boy</span>
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="child-gender" value="other">
+              <span class="radio-card-inner">
+                <span class="radio-card-emoji">🧒</span>
+                <span class="radio-card-label">Other</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Swimming experience</label>
+          <div class="form-error" id="err-exp"></div>
+          <div class="exp-options">
+            <label class="exp-option">
+              <input type="radio" name="child-exp" value="none">
+              <div class="exp-option-inner">
+                <div class="exp-option-icon">🐣</div>
+                <div><div class="exp-option-title">No experience</div><div class="exp-option-sub">First time in water</div></div>
+                <div class="exp-option-check"></div>
+              </div>
+            </label>
+            <label class="exp-option">
+              <input type="radio" name="child-exp" value="some">
+              <div class="exp-option-inner">
+                <div class="exp-option-icon">🌊</div>
+                <div><div class="exp-option-title">Some experience</div><div class="exp-option-sub">Been in pools, not lessons</div></div>
+                <div class="exp-option-check"></div>
+              </div>
+            </label>
+            <label class="exp-option">
+              <input type="radio" name="child-exp" value="intermediate">
+              <div class="exp-option-inner">
+                <div class="exp-option-icon">🏊</div>
+                <div><div class="exp-option-title">Intermediate</div><div class="exp-option-sub">Can float and kick</div></div>
+                <div class="exp-option-check"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="intake-nav-row">
+        <a class="btn btn-outline" href="register.html">← Back</a>
+        <button class="btn btn-primary" onclick="step1_next()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── Step 2: Nap times ──────────────────────────── -->
+    <div class="intake-step-panel" id="panel-2">
+      <div class="intake-panel-header">
+        <div class="intake-panel-step-label">Step 2 of 4</div>
+        <h2 class="intake-panel-title">Nap times</h2>
+        <p class="intake-panel-sub">Completely optional. We use these to flag class slots that might clash — you can still book any time you choose.</p>
+      </div>
+
+      <div class="nap-explainer">
+        <div class="nap-explainer-icon">🌙</div>
+        <div>
+          <div class="nap-explainer-title">How nap times work</div>
+          <div class="nap-explainer-text">When you browse classes, any slot that overlaps will be flagged with a warning. It's a soft hint — never a hard block.</div>
+        </div>
+      </div>
+
+      <div id="nap-container"></div>
+
+      <button class="nap-add-btn" id="nap-add-btn" onclick="addNap()">
+        <span style="font-size:16px;line-height:1">+</span> Add a nap time
+      </button>
+      <div class="form-hint" style="margin-top:8px">Up to 3 nap times, e.g. morning and afternoon nap.</div>
+
+      <div class="intake-nav-row" style="margin-top:32px">
+        <button class="btn btn-outline" onclick="goTo(1)">← Back</button>
+        <button class="btn btn-primary" onclick="advance(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── Step 3: Health & safety ────────────────────── -->
+    <div class="intake-step-panel" id="panel-3">
+      <div class="intake-panel-header">
+        <div class="intake-panel-step-label">Step 3 of 4</div>
+        <h2 class="intake-panel-title">Health &amp; safety notes</h2>
+        <p class="intake-panel-sub">Your instructor reviews this before every class. You can update it anytime from your child's profile.</p>
+      </div>
+
+      <div class="form-fields">
+
+        <div class="form-field">
+          <label class="form-label">Allergies <span class="form-label-badge">optional</span></label>
+          <div class="toggle-row-field">
+            <div>
+              <div class="toggle-field-label">Has known allergies</div>
+              <div class="toggle-field-sub">Food, medication, or environmental</div>
+            </div>
+            <button class="toggle-switch" id="tog-allergies" onclick="toggleSection('allergies')" role="switch" aria-checked="false">
+              <span class="toggle-knob"></span>
+            </button>
+          </div>
+          <div class="conditional-field" id="sec-allergies">
+            <textarea class="form-textarea" id="child-allergies" placeholder="e.g. Penicillin allergy, bee stings — EpiPen carried"></textarea>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Medical conditions <span class="form-label-badge">optional</span></label>
+          <div class="toggle-row-field">
+            <div>
+              <div class="toggle-field-label">Has a medical condition</div>
+              <div class="toggle-field-sub">Asthma, epilepsy, heart conditions, etc.</div>
+            </div>
+            <button class="toggle-switch" id="tog-medical" onclick="toggleSection('medical')" role="switch" aria-checked="false">
+              <span class="toggle-knob"></span>
+            </button>
+          </div>
+          <div class="conditional-field" id="sec-medical">
+            <textarea class="form-textarea" id="child-medical" placeholder="e.g. Mild asthma — has inhaler, no recent hospitalisation"></textarea>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Fears or sensitivities <span class="form-label-badge">optional</span></label>
+          <div class="toggle-row-field">
+            <div>
+              <div class="toggle-field-label">Has fears or sensitivities</div>
+              <div class="toggle-field-sub">Water anxiety, loud sounds, being splashed</div>
+            </div>
+            <button class="toggle-switch" id="tog-fears" onclick="toggleSection('fears')" role="switch" aria-checked="false">
+              <span class="toggle-knob"></span>
+            </button>
+          </div>
+          <div class="conditional-field" id="sec-fears">
+            <textarea class="form-textarea" id="child-fears" placeholder="e.g. Nervous about going underwater — building confidence slowly"></textarea>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Anything else? <span class="form-label-badge">optional</span></label>
+          <textarea class="form-textarea" id="child-notes" placeholder="Anything else your instructor should know..."></textarea>
+        </div>
+
+        <div class="consent-notice">
+          <div class="consent-notice-icon">📋</div>
+          <div>
+            <div class="consent-notice-title">Consent form required before first lesson</div>
+            <div class="consent-notice-text">After saving, your child's status will be <strong>Consent Pending</strong>. Blue Fin will contact you to sign a physical consent form. Bookings are blocked until confirmed.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="intake-nav-row">
+        <button class="btn btn-outline" onclick="goTo(2)">← Back</button>
+        <button class="btn btn-primary" onclick="step3_next()">Review profile →</button>
+      </div>
+    </div>
+
+    <!-- ── Step 4: Review ─────────────────────────────── -->
+    <div class="intake-step-panel" id="panel-4">
+      <div class="intake-panel-header">
+        <div class="intake-panel-step-label">Step 4 of 4</div>
+        <h2 class="intake-panel-title">Review your child's profile</h2>
+        <p class="intake-panel-sub">Check everything looks right before saving.</p>
+      </div>
+
+      <div class="review-card" id="review-card"></div>
+
+      <div class="intake-nav-row" style="flex-direction:column;gap:10px">
+        <button class="btn btn-primary btn-lg" style="width:100%" onclick="saveProfile()">Save profile &amp; continue →</button>
+        <button class="btn btn-outline" style="width:100%" onclick="goTo(3)">← Edit details</button>
+      </div>
+    </div>
+
+    <!-- ── Done ───────────────────────────────────────── -->
+    <div class="intake-step-panel" id="panel-done">
+      <div style="text-align:center;padding:40px 0 20px">
+        <div style="font-size:64px;margin-bottom:20px">🎉</div>
+        <h2 class="intake-panel-title" style="text-align:center">Profile saved!</h2>
+        <p class="intake-panel-sub" id="done-msg" style="text-align:center;margin-bottom:32px"></p>
+        <div class="done-status-card">
+          <div class="done-status-row">
+            <span class="done-status-label">Consent status</span>
+            <span class="done-status-badge pending">Pending</span>
+          </div>
+          <div class="done-status-text">The school will contact you to sign the consent form before your first lesson.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:28px">
+          <a class="btn btn-primary btn-lg" style="display:flex;justify-content:center" href="classes.html">Browse classes →</a>
+          <button class="btn btn-outline" onclick="resetForm()">+ Add another child</button>
+          <a class="btn btn-outline" style="display:flex;justify-content:center" href="pricing.html">View pricing &amp; buy lessons</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/app.js"></script>
+<script src="../js/add-child.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Lessons — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="home.html">Activity<span>Bookr</span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="home.html">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="pricing.html">Pricing</a>
+        <a class="nav-link active" href="classes.html">Classes</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-cta" href="dashboard.html">Dashboard</a>
+        <div class="nav-hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a class="mobile-menu-link" href="home.html">Home</a>
+  <a class="mobile-menu-link" href="classes.html">Classes</a>
+  <a class="mobile-menu-link" href="dashboard.html">Dashboard</a>
+</div>
+
+<!-- Hero -->
+<section class="purchase-hero">
+  <div class="container">
+    <a class="back-btn" href="classes.html">← Back to classes</a>
+    <div class="section-label" style="margin:16px 0 8px">Lesson packs</div>
+    <h1 class="page-hero-title" style="margin-bottom:8px">Buy <em>lessons</em></h1>
+    <p class="page-hero-sub">Lessons are added to your balance instantly. Use them to book any available class.</p>
+  </div>
+</section>
+
+<!-- Main layout -->
+<div class="container purchase-layout">
+
+  <!-- Left: balance + pack picker -->
+  <div>
+
+    <div class="balance-banner">
+      <div>
+        <div class="balance-banner-label">Current balance</div>
+        <div class="balance-banner-num" id="balance-num">0</div>
+        <div class="balance-banner-sub">lessons remaining</div>
+      </div>
+      <div style="text-align:right">
+        <!-- <div class="balance-banner-child" id="balance-child">Amara Mokoena</div> -->
+        <div class="balance-banner-status pending">Consent pending</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:14px">Choose a pack</div>
+
+    <div class="pack-selector" id="pack-selector">
+
+      <label class="pack-select-card">
+        <input type="radio" name="pack" value="trial" data-price="95" data-lessons="1">
+        <div class="psc-inner">
+          <div class="psc-top">
+            <div>
+              <div class="psc-name">Trial lesson</div>
+              <div class="psc-detail">New families only · one-time</div>
+            </div>
+            <div class="psc-price-col">
+              <div class="psc-price">R95</div>
+              <div class="psc-per">1 lesson</div>
+            </div>
+          </div>
+          <div class="psc-check"></div>
+        </div>
+      </label>
+
+      <label class="pack-select-card">
+        <input type="radio" name="pack" value="single" data-price="120" data-lessons="1">
+        <div class="psc-inner">
+          <div class="psc-top">
+            <div>
+              <div class="psc-name">Single lesson</div>
+              <div class="psc-detail">R120 per lesson</div>
+            </div>
+            <div class="psc-price-col">
+              <div class="psc-price">R120</div>
+              <div class="psc-per">1 lesson</div>
+            </div>
+          </div>
+          <div class="psc-check"></div>
+        </div>
+      </label>
+
+      <label class="pack-select-card featured">
+        <div class="psc-featured-tag">Most popular</div>
+        <input type="radio" name="pack" value="4pack" data-price="440" data-lessons="4" checked>
+        <div class="psc-inner">
+          <div class="psc-top">
+            <div>
+              <div class="psc-name">4-lesson pack</div>
+              <div class="psc-detail">R110 per lesson · save R40</div>
+            </div>
+            <div class="psc-price-col">
+              <div class="psc-price">R440</div>
+              <div class="psc-per">4 lessons</div>
+            </div>
+          </div>
+          <div class="psc-check checked"></div>
+        </div>
+      </label>
+
+      <label class="pack-select-card">
+        <input type="radio" name="pack" value="8pack" data-price="800" data-lessons="8">
+        <div class="psc-inner">
+          <div class="psc-top">
+            <div>
+              <div class="psc-name">8-lesson pack</div>
+              <div class="psc-detail">R100 per lesson · save R160</div>
+            </div>
+            <div class="psc-price-col">
+              <div class="psc-price">R800</div>
+              <div class="psc-per">8 lessons</div>
+            </div>
+          </div>
+          <div class="psc-check"></div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- Right: order summary + payment form -->
+  <div>
+    <div class="order-summary-card">
+      <div class="order-summary-title">Order summary</div>
+
+      <div class="order-line" id="order-line">
+        <span class="order-line-label" id="order-desc">4-lesson pack · Amara</span>
+        <span class="order-line-val" id="order-price">R440</span>
+      </div>
+      <div class="order-line" style="padding-top:12px;border-top:1px solid var(--border-2);margin-top:4px">
+        <span style="font-size:15px;font-weight:600;color:var(--ink)">Total</span>
+        <span class="order-total" id="order-total">R440</span>
+      </div>
+      <div class="order-lessons-note" id="order-note">
+        4 lessons will be added to Amara's balance
+      </div>
+
+      <!-- Card details -->
+      <div class="card-input-section">
+        <div class="section-label" style="margin-bottom:12px">Payment details</div>
+
+        <div class="form-field" style="margin-bottom:10px">
+          <label class="form-label">Card number</label>
+          <div class="card-input-wrap">
+            <input class="form-input" type="text" id="card-number"
+              placeholder="4242 4242 4242 4242" maxlength="19"
+              oninput="formatCardNumber(this)" autocomplete="cc-number">
+            <div class="card-brand-icon">💳</div>
+          </div>
+          <div class="form-error" id="err-card-number"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Expiry</label>
+            <input class="form-input" type="text" id="card-expiry"
+              placeholder="MM / YY" maxlength="7"
+              oninput="formatExpiry(this)" autocomplete="cc-exp">
+            <div class="form-error" id="err-card-expiry"></div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">CVC</label>
+            <input class="form-input" type="text" id="card-cvc"
+              placeholder="123" maxlength="4" autocomplete="cc-csc">
+            <div class="form-error" id="err-card-cvc"></div>
+          </div>
+        </div>
+
+        <div class="form-field" style="margin-top:10px">
+          <label class="form-label">Name on card</label>
+          <input class="form-input" type="text" id="card-name"
+            placeholder="Thandi Mokoena" autocomplete="cc-name">
+          <div class="form-error" id="err-card-name"></div>
+        </div>
+
+        <div class="form-error" id="err-payment" style="margin-top:8px;text-align:center"></div>
+      </div>
+
+      <div class="stripe-note">
+        <span>🔒</span> Secure payment · powered by <strong>Stripe</strong>
+      </div>
+
+      <button class="btn btn-primary" id="pay-btn"
+        style="width:100%;margin-top:16px;padding:15px;font-size:14px"
+        onclick="submitPayment()">
+        Pay <span id="pay-amount">R440</span> →
+      </button>
+
+      <a class="btn btn-outline" href="classes.html"
+        style="width:100%;margin-top:10px;display:flex;justify-content:center">
+        Cancel
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer" style="margin-top:0">
+  <div class="container">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Blue Fin Swim School · Powered by ActivityBookr</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/app.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/purchase.js"></script>
+</body>
+</html>

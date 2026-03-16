@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Fin Swim School — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://kit.fontawesome.com/b9f5f8ebff.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="home.html">Activity<span>Bookr</span></a>
+      <div class="nav-links">
+        <a class="nav-link active" href="home.html">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="pricing.html">Pricing</a>
+        <a class="nav-link" href="classes.html">Classes</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
+        <a class="nav-cta" href="register.html">Get Started</a>
+        <div class="nav-hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a class="mobile-menu-link" href="home.html">Home</a>
+  <a class="mobile-menu-link" href="about.html">About</a>
+  <a class="mobile-menu-link" href="pricing.html">Pricing</a>
+  <a class="mobile-menu-link" href="classes.html">Classes</a>
+  <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+</div>
+
+<!-- ── Hero ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+
+      <div>
+        <h1 class="hero-title animate" style="animation-delay:.1s">
+          Water safety <em>from</em><br>the very <em>first</em> splash
+        </h1>
+        <p class="hero-sub animate" style="animation-delay:.2s">
+          Expert-led swimming classes for babies and toddlers aged 0–10 years.
+          Small classes, big results.
+        </p>
+        <div class="hero-actions animate" style="animation-delay:.3s">
+          <a class="btn btn-primary btn-lg" href="classes.html">Browse Classes</a>
+          <a class="btn btn-outline btn-lg" href="about.html">Learn More</a>
+        </div>
+        <div class="hero-trust animate" style="animation-delay:.45s">
+          <div class="hero-trust-avatars">
+            <div class="hero-trust-avatar">TM</div>
+            <div class="hero-trust-avatar">LN</div>
+            <div class="hero-trust-avatar">SP</div>
+            <div class="hero-trust-avatar">KD</div>
+          </div>
+          <div class="hero-trust-text">Trusted by 120+ families in Durban</div>
+        </div>
+      </div>
+
+      <div class="hero-visual animate" style="animation-delay:.25s">
+        <div class="hero-card-stack">
+          <div class="hero-card hero-card-main">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <div>
+                <div class="class-preview-title">Beginner Babies</div>
+                <div class="class-preview-meta">Monday · 9:00 AM · 30 min</div>
+              </div>
+              <div class="badge"><div class="badge-dot green"></div>Open</div>
+            </div>
+            <div class="cap-bar-wrap" style="margin-bottom:12px">
+              <div class="cap-bar"><div class="cap-fill" style="width:50%"></div></div>
+              <div class="cap-label">2 of 4 spots taken</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-4);margin-bottom:8px">SPOTS</div>
+            <div class="class-preview-spots" style="margin-bottom:14px">
+              <div class="spot taken">✓</div>
+              <div class="spot taken">✓</div>
+              <div class="spot you">you</div>
+              <div class="spot"></div>
+            </div>
+            <a class="btn btn-primary" style="width:100%;display:flex;justify-content:center" href="classes.html">Book this class</a>
+          </div>
+          <div class="hero-card hero-card-float">
+            <div class="float-card-label">Your Balance</div>
+            <div class="float-card-num">4</div>
+            <div class="float-card-sub">lessons remaining</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats ─────────────────────────────────────────────── -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item animate"><div class="stat-num">4</div><div class="stat-label">Max per class</div></div>
+      <div class="stat-item animate" style="animation-delay:.1s"><div class="stat-num">0–10</div><div class="stat-label">Years</div></div>
+      <div class="stat-item animate" style="animation-delay:.2s"><div class="stat-num">120+</div><div class="stat-label">Families</div></div>
+      <div class="stat-item animate" style="animation-delay:.3s"><div class="stat-num">9yr</div><div class="stat-label">In Durban</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ──────────────────────────────────────── -->
+<section class="how">
+  <div class="container">
+    <div class="how-header">
+      <div class="section-label">How it works</div>
+      <h2 class="how-title">From sign-up to <em>poolside</em> in minutes</h2>
+      <p class="how-sub">No complicated booking systems. No phone calls. Just a simple flow to get your child into the water.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step animate">
+        <div class="how-step-num">01</div>
+        <img src="../assets/baby-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+        <div class="how-step-title">Create a profile</div>
+        <div class="how-step-text">Add your child's details, age, and optional nap times so we can show you the best slots.</div>
+      </div>
+      <div class="how-step animate" style="animation-delay:.1s">
+        <div class="how-step-num">02</div>
+        <img src="../assets/person-swimming-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+        <div class="how-step-title">Browse classes</div>
+        <div class="how-step-text">Filter by day and time. We'll flag nap-time conflicts automatically.</div>
+      </div>
+      <div class="how-step animate" style="animation-delay:.2s">
+        <div class="how-step-num">03</div>
+        <img src="../assets/credit-card-regular-full.svg" alt="" srcset="" style="height: 2.5rem;">
+        <div class="how-step-title">Buy a lesson pack</div>
+        <div class="how-step-text">Purchase lessons upfront. The more you buy, the less each one costs. Secure payment via Stripe.</div>
+      </div>
+      <div class="how-step animate" style="animation-delay:.3s">
+        <div class="how-step-num">04</div>
+        <img src="../assets/calendar-check-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
+        <div class="how-step-title">Book &amp; go</div>
+        <div class="how-step-text">Confirm your slot. One lesson deducted. Reminder sent the day before.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Class previews ────────────────────────────────────── -->
+<section class="classes-preview">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Available classes</div>
+        <h2 class="section-title">Find the right class<br>for your child</h2>
+      </div>
+      <a class="btn btn-outline" href="classes.html">View all classes →</a>
+    </div>
+    <div class="classes-grid">
+      <a class="class-card animate" href="classes.html">
+        <div class="class-card-img">
+          <img src="../assets/baby-solid-full.svg" alt="" srcset="" style="height: 4rem;">
+        </div>
+        <div class="class-card-body">
+          <div class="class-card-age">0 – 18 months</div>
+          <div class="class-card-name">Beginner Babies</div>
+          <div class="class-card-desc">Safe water introduction for your youngest. Parent-assisted throughout.</div>
+          <div class="cap-bar-wrap"><div class="cap-bar"><div class="cap-fill" style="width:50%"></div></div><div class="cap-label">2 of 4 spots</div></div>
+          <div class="class-card-footer"><div class="class-card-time">Mon · 9:00 AM</div><div class="badge">R120 / lesson</div></div>
+        </div>
+      </a>
+      <a class="class-card animate" style="animation-delay:.1s" href="classes.html">
+        <div class="class-card-img">
+          <img src="../assets/child-solid-full.svg" alt="" srcset="" style="height: 4rem;">
+        </div>
+        <div class="class-card-body">
+          <div class="class-card-age">18 months – 3 years</div>
+          <div class="class-card-name">Toddler Splash</div>
+          <div class="class-card-desc">Build water confidence with kicking, floating, and basic breath control.</div>
+          <div class="cap-bar-wrap"><div class="cap-bar"><div class="cap-fill nearly" style="width:75%"></div></div><div class="cap-label">3 of 4 spots · 1 left</div></div>
+          <div class="class-card-footer"><div class="class-card-time">Tue · 2:00 PM</div><div class="badge">R120 / lesson</div></div>
+        </div>
+      </a>
+      <a class="class-card animate" style="animation-delay:.2s" href="classes.html">
+        <div class="class-card-img">
+          <img src="../assets/water-solid-full.svg" alt="" srcset="" style="height: 4rem;">
+        </div>
+        <div class="class-card-body">
+          <div class="class-card-age">3 – 5 years</div>
+          <div class="class-card-name">Water Confidence</div>
+          <div class="class-card-desc">Independent movement in the water. Structured strokes and water safety.</div>
+          <div class="cap-bar-wrap"><div class="cap-bar"><div class="cap-fill full" style="width:100%"></div></div><div class="cap-label">Full — join waitlist</div></div>
+          <div class="class-card-footer"><div class="class-card-time">Wed · 10:00 AM</div><div class="badge" style="background:#FEF3C7;color:#92400E;border-color:#FDE68A">Waitlist</div></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Instructors ───────────────────────────────────────── -->
+<section style="background:var(--surface);padding:80px 0">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Our team</div>
+        <h2 class="section-title">Expert instructors<br>who care</h2>
+      </div>
+      <a class="btn btn-outline" href="about.html">About us →</a>
+    </div>
+    <div class="instructors-grid">
+      <div class="instructor-card animate">
+        <div class="instructor-avatar">SM</div>
+        <div>
+          <div class="instructor-name">Sara Molefe</div>
+          <div class="instructor-title">Lead Instructor · 8 years experience</div>
+          <div class="instructor-bio">Certified swim instructor specialising in infant aquatics. Worked with over 300 children, with a gift for making babies comfortable in the water from day one.</div>
+        </div>
+      </div>
+      <div class="instructor-card animate" style="animation-delay:.1s">
+        <div class="instructor-avatar">JK</div>
+        <div>
+          <div class="instructor-name">James Khumalo</div>
+          <div class="instructor-title">Instructor · 4 years experience</div>
+          <div class="instructor-bio">National swimming certificate. Specialises in toddler and pre-school groups. His calm approach helps even the most nervous toddlers find their confidence.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────── -->
+<section class="home-cta">
+  <div class="container">
+    <div class="home-cta-inner">
+      <div>
+        <h2 class="home-cta-title">Ready to get <em>started?</em></h2>
+        <p class="home-cta-sub">Book a trial lesson for just R95. Full refund if you're not satisfied.</p>
+      </div>
+      <div class="home-cta-actions">
+        <a class="btn-white" href="pricing.html">See pricing</a>
+        <a class="btn-ghost" href="register.html">Create account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo"><a href="home.html" style="color:inherit;text-decoration:none">Activity<span>Bookr</span></a></div>
+        <p class="footer-desc">Online booking for Blue Fin Swim School, Durban.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <a class="footer-link" href="home.html">Home</a>
+        <a class="footer-link" href="about.html">About</a>
+        <a class="footer-link" href="pricing.html">Pricing</a>
+        <a class="footer-link" href="classes.html">Classes</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Account</div>
+        <a class="footer-link" href="register.html">Create Account</a>
+        <a class="footer-link" href="login.html">Log In</a>
+        <a class="footer-link" href="pricing.html">Buy Lessons</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Blue Fin Swim School · Powered by ActivityBookr</div>
+      <div class="footer-copy">Durban, KwaZulu-Natal</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/app.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/home.js"></script>
+</body>
+</html>

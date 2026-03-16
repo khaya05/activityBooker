@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Class — ActivityBookr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="home.html">Activity<span>Bookr</span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="home.html">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="pricing.html">Pricing</a>
+        <a class="nav-link active" href="classes.html">Classes</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-cta" href="dashboard.html">Dashboard</a>
+        <div class="nav-hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a class="mobile-menu-link" href="home.html">Home</a>
+  <a class="mobile-menu-link" href="classes.html">Classes</a>
+  <a class="mobile-menu-link" href="dashboard.html">Dashboard</a>
+</div>
+
+<!-- ── Booking form ──────────────────────────────────────── -->
+<div class="container book-layout">
+
+  <!-- Left: class details + confirmation form -->
+  <div class="book-main">
+
+    <a class="back-btn" href="classes.html">← Back to classes</a>
+
+    <!-- Class card -->
+    <div class="book-class-card" id="book-class-card">
+      <!-- populated by book.js -->
+    </div>
+
+    <!-- Nap conflict warning -->
+    <div class="book-nap-warn" id="book-nap-warn" style="display:none">
+      <span class="book-nap-warn-icon">🌙</span>
+      <div>
+        <div class="book-nap-warn-title">Nap time overlap</div>
+        <div class="book-nap-warn-text" id="book-nap-warn-text"></div>
+      </div>
+    </div>
+
+    <!-- Child selector -->
+    <div class="book-section-label">Book for</div>
+    <div id="child-list">
+      <!-- populated by book.js -->
+    </div>
+
+    <!-- Consent blocked notice -->
+    <div class="book-blocked" id="book-consent-blocked" style="display:none">
+      <div class="book-blocked-icon">📋</div>
+      <div>
+        <div class="book-blocked-title">Consent form required</div>
+        <div class="book-blocked-text">
+          This child's consent form hasn't been signed yet.
+          Blue Fin will contact you to arrange it before the first lesson.
+          Bookings are blocked until consent is confirmed.
+        </div>
+      </div>
+    </div>
+
+    <!-- No children notice -->
+    <div class="book-blocked" id="book-no-children" style="display:none">
+      <div class="book-blocked-icon">👶</div>
+      <div>
+        <div class="book-blocked-title">No child profile yet</div>
+        <div class="book-blocked-text">Add a child profile before booking a class.</div>
+        <a class="btn btn-primary btn-sm" href="add-child.html" style="display:inline-flex;margin-top:12px">
+          Add a child →
+        </a>
+      </div>
+    </div>
+
+    <!-- Balance row -->
+    <div class="book-balance-row" id="book-balance-row">
+      <div>
+        <div class="book-balance-label">Lesson balance</div>
+        <div class="book-balance-num" id="book-balance-num">0 lessons</div>
+      </div>
+      <a class="btn btn-outline btn-sm" href="purchase.html">Buy lessons</a>
+    </div>
+
+    <!-- No balance warning -->
+    <div class="book-blocked" id="book-no-balance" style="display:none">
+      <div class="book-blocked-icon">💳</div>
+      <div>
+        <div class="book-blocked-title">No lessons in your balance</div>
+        <div class="book-blocked-text">Purchase a lesson pack to continue.</div>
+        <a class="btn btn-primary btn-sm" href="purchase.html" style="display:inline-flex;margin-top:12px">
+          Buy lessons →
+        </a>
+      </div>
+    </div>
+
+    <!-- Confirm button -->
+    <div class="book-actions" id="book-actions">
+      <a class="btn btn-outline" href="classes.html" style="flex:1;justify-content:center;display:flex">
+        Cancel
+      </a>
+      <button class="btn btn-primary" id="confirm-btn" style="flex:2" onclick="confirmBooking()">
+        Confirm — 1 lesson
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Right: summary sidebar -->
+  <aside class="book-sidebar">
+    <div class="book-summary-card" id="book-summary-card">
+      <!-- populated by book.js -->
+    </div>
+  </aside>
+
+</div>
+
+<!-- ── Confirmation state (replaces form) ───────────────── -->
+<div class="container" id="book-confirmed" style="display:none">
+  <div class="book-success">
+    <div class="book-success-icon">✅</div>
+    <h2 class="book-success-title">Booking confirmed!</h2>
+    <p class="book-success-sub" id="confirmed-sub"></p>
+    <div class="book-success-detail" id="confirmed-detail"></div>
+    <div class="book-success-actions">
+      <a class="btn btn-primary btn-lg" href="dashboard.html">View my bookings</a>
+      <a class="btn btn-outline" href="classes.html">Book another class</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Blue Fin Swim School · Powered by ActivityBookr</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/app.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/book.js"></script>
+</body>
+</html>
