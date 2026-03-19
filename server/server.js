@@ -5,15 +5,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 
+import authRouter from './routes/authRouter.js'
+
 const app = express()
 
 app.use(express.json());
 
 // routes
-app.use('/api/v1/auth', () =>{})
-app.use('/api/v1/parents', () =>{})
-app.use('/api/v1/children', () =>{})
-app.use('/api/v1/lessons', () =>{})
+app.use('/api/v1/auth', authRouter)
+// app.use('/api/v1/users', () =>{})
+// app.use('/api/v1/children', () =>{})
+// app.use('/api/v1/lessons', () =>{})
 
 
 app.use('*', (req, res) =>{
