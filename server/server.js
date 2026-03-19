@@ -4,6 +4,7 @@ dotenv.config();
 import express from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import { StatusCodes } from 'http-status-codes';
 
 import authRouter from './routes/authRouter.js';
@@ -14,6 +15,7 @@ const app = express();
 
 // ─── Global middleware ────────────────────────────────────
 app.use(express.json());
+app.use(cookieParser());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -22,8 +24,8 @@ if (process.env.NODE_ENV === 'development') {
 // ─── Routes ───────────────────────────────────────────────
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
-// app.use('/api/v1/children', childrenRouter);
-// app.use('/api/v1/lessons',  lessonsRouter);
+// app.use('/api/v1/children', authenticateUser, childrenRouter);
+// app.use('/api/v1/lessons',  authenticateUser, lessonsRouter);
 
 // ─── 404 handler ─────────────────────────────────────────
 app.use('*', (req, res) => {
