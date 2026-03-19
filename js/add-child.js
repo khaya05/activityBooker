@@ -1,22 +1,16 @@
 // add-child.js
-
-// ─── State ────────────────────────────────────────────────
 const intake = {
-  step: 1,   // current step
-  maxStep: 1,   // furthest step reached — controls sidebar nav clicks
+  step: 1,
+  maxStep: 1,
   napCount: 0,
   napIds: [],
 };
 
-// ─── Step navigation ──────────────────────────────────────
-
-// Called by sidebar nav dots — only allow steps already visited
 function goTo(n) {
   if (n > intake.maxStep) return;
   _switchStep(n);
 }
 
-// Called by Continue / Back buttons — always allowed
 function advance(n) {
   if (n > intake.maxStep) intake.maxStep = n;
   _switchStep(n);
@@ -25,12 +19,10 @@ function advance(n) {
 function _switchStep(n) {
   intake.step = n;
 
-  // Panels
   document.querySelectorAll('.intake-step-panel').forEach(p => p.classList.remove('active'));
   const panel = document.getElementById('panel-' + (n === 'done' ? 'done' : n));
   if (panel) panel.classList.add('active');
 
-  // Sidebar nav + mobile dots
   [1, 2, 3, 4].forEach(i => {
     const nav = document.getElementById('snav-' + i);
     const circ = document.getElementById('snavc-' + i);
@@ -59,7 +51,6 @@ function _switchStep(n) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ─── Step 1: validation ───────────────────────────────────
 function step1_next() {
   fClear(['err-first', 'err-last', 'err-dob', 'err-exp']);
 
@@ -85,13 +76,11 @@ function step1_next() {
   advance(2);
 }
 
-// ─── Step 3: advance to review ────────────────────────────
 function step3_next() {
   _buildReview();
   advance(4);
 }
 
-// ─── Age calculation ──────────────────────────────────────
 function _ageFromDob(dob) {
   const birth = new Date(dob + 'T00:00:00');
   const now = new Date();
@@ -110,7 +99,6 @@ function _formatAge(dob) {
   return `${years} year${years !== 1 ? 's' : ''} old`;
 }
 
-// DOB → live age chip
 document.getElementById('child-dob').addEventListener('change', function () {
   const display = document.getElementById('age-display');
   const chip = document.getElementById('age-chip');
@@ -122,7 +110,6 @@ document.getElementById('child-dob').addEventListener('change', function () {
   }
 });
 
-// ─── Nap times ────────────────────────────────────────────
 function addNap() {
   if (intake.napIds.length >= 3) return;
   intake.napCount++;
@@ -156,7 +143,6 @@ function addNap() {
   document.getElementById('nap-container').appendChild(el);
   updateNapPreview(id);
 
-  // Disable add button at max
   document.getElementById('nap-add-btn').disabled = intake.napIds.length >= 3;
 }
 
@@ -197,7 +183,6 @@ function _fmtTime(t) {
   return `${hr % 12 || 12}:${m} ${hr >= 12 ? 'PM' : 'AM'}`;
 }
 
-// ─── Health toggles ───────────────────────────────────────
 function toggleSection(key) {
   const btn = document.getElementById('tog-' + key);
   const sec = document.getElementById('sec-' + key);
@@ -206,7 +191,6 @@ function toggleSection(key) {
   sec.classList.toggle('open', on);
 }
 
-// ─── Review card ──────────────────────────────────────────
 function _buildReview() {
   const first = fv('child-first');
   const last = fv('child-last');
@@ -221,7 +205,6 @@ function _buildReview() {
     ? new Date(dob + 'T00:00:00').toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })
     : '—';
 
-  // Nap pills
   const napPills = intake.napIds.map(id => {
     const s = document.getElementById('nap-start-' + id)?.value;
     const e = document.getElementById('nap-end-' + id)?.value;
@@ -229,7 +212,6 @@ function _buildReview() {
     return `<span class="review-nap-pill">🌙 ${_fmtTime(s)} – ${_fmtTime(e)}</span>`;
   }).filter(Boolean);
 
-  // Health flags
   const hasAllergies = document.getElementById('tog-allergies').classList.contains('on');
   const hasMedical = document.getElementById('tog-medical').classList.contains('on');
   const hasFears = document.getElementById('tog-fears').classList.contains('on');
@@ -279,12 +261,10 @@ function _rRow(label, value) {
   return `<div class="review-row"><span class="review-row-label">${label}</span><span class="review-row-value" style="max-width:60%">${value}</span></div>`;
 }
 
-// ─── Save profile ─────────────────────────────────────────
 function saveProfile() {
   const first = fv('child-first');
   const last = fv('child-last');
 
-  // Add to APP.children
   const child = {
     id: Date.now(),
     name: first + ' ' + last,
@@ -299,7 +279,6 @@ function saveProfile() {
 
   advance('done');
 
-  // Mark all sidebar steps as done
   [1, 2, 3, 4].forEach(i => {
     const circ = document.getElementById('snavc-' + i);
     const nav = document.getElementById('snav-' + i);
@@ -310,7 +289,6 @@ function saveProfile() {
   });
 }
 
-// ─── Reset for adding another child ───────────────────────
 function resetForm() {
   // Clear all inputs
   ['child-first', 'child-last', 'child-dob', 'child-allergies', 'child-medical', 'child-fears', 'child-notes']

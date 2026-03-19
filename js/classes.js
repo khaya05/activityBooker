@@ -44,7 +44,7 @@ function render() {
       <div class="class-row-sep"></div>
       <div class="class-row-body">
         <div class="class-row-name">
-          ${c.emoji} ${c.name}
+          <img src= ${c.emoji} style="width: 1.3rem" > ${c.name}
           ${nap ? '<span class="nap-badge">🌙 Nap conflict</span>' : ''}
         </div>
         <div class="class-row-meta">${c.age} · 30 min · ${c.instructor}</div>

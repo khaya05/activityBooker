@@ -1,6 +1,5 @@
 // login.js
 
-// ── State helpers ─────────────────────────────────────────
 function showPanel(id) {
   ['login-main', 'login-forgot', 'login-reset-sent'].forEach(s => {
     document.getElementById(s).style.display = s === id ? 'block' : 'none';
@@ -10,7 +9,6 @@ function showPanel(id) {
 function showForgot() { showPanel('login-forgot'); }
 function hideForgot() { showPanel('login-main'); }
 
-// ── Login ─────────────────────────────────────────────────
 function login_submit() {
   fClear(['err-email', 'err-password']);
   fErr('err-general', '');
@@ -33,14 +31,12 @@ function login_submit() {
   }, 900);
 }
 
-// ── Demo login ────────────────────────────────────────────
 function login_demo() {
   APP.isLoggedIn = true;
   APP.user = { first: 'Thandi', email: 'thandi@demo.com' };
   window.location.href = 'dashboard.html';
 }
 
-// ── Forgot password ───────────────────────────────────────
 function login_forgot() {
   const email = fv('forgot-email');
   fErr('err-forgot', '');
@@ -48,7 +44,6 @@ function login_forgot() {
   showPanel('login-reset-sent');
 }
 
-// ── Toggle password visibility ────────────────────────────
 function togglePwd(id, btn) {
   const inp = document.getElementById(id);
   inp.type = inp.type === 'password' ? 'text' : 'password';

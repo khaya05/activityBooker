@@ -11,16 +11,16 @@ const APP = {
 
 // ─── Class data ───────────────────────────────────────────
 const CLASSES = [
-  { id: 1,  name: 'Beginner Babies',    day: 'Mon', hour: 9,  ampm: 'AM', instructor: 'Sara M.',  age: '0–18 months', taken: 2, total: 4, emoji: '🍼' },
-  { id: 2,  name: 'Water Confidence',   day: 'Mon', hour: 10, ampm: 'AM', instructor: 'James K.', age: '18m–3 yr',    taken: 1, total: 4, emoji: '🌊' },
-  { id: 3,  name: 'Toddler Splash',     day: 'Tue', hour: 9,  ampm: 'AM', instructor: 'Sara M.',  age: '18m–3 yr',    taken: 3, total: 4, emoji: '🐟' },
-  { id: 4,  name: 'Confident Swimmers', day: 'Tue', hour: 14, ampm: 'PM', instructor: 'James K.', age: '3–5 years',   taken: 4, total: 4, emoji: '🏆' },
-  { id: 5,  name: 'Beginner Babies',    day: 'Wed', hour: 9,  ampm: 'AM', instructor: 'Sara M.',  age: '0–18 months', taken: 1, total: 4, emoji: '🍼' },
-  { id: 6,  name: 'Toddler Splash',     day: 'Wed', hour: 14, ampm: 'PM', instructor: 'Sara M.',  age: '18m–3 yr',    taken: 2, total: 4, emoji: '🐟' },
-  { id: 7,  name: 'Water Confidence',   day: 'Thu', hour: 10, ampm: 'AM', instructor: 'James K.', age: '18m–3 yr',    taken: 3, total: 4, emoji: '🌊' },
-  { id: 8,  name: 'Confident Swimmers', day: 'Thu', hour: 15, ampm: 'PM', instructor: 'Sara M.',  age: '3–5 years',   taken: 2, total: 4, emoji: '🏆' },
-  { id: 9,  name: 'Beginner Babies',    day: 'Sat', hour: 8,  ampm: 'AM', instructor: 'James K.', age: '0–18 months', taken: 0, total: 4, emoji: '🍼' },
-  { id: 10, name: 'Toddler Splash',     day: 'Sat', hour: 10, ampm: 'AM', instructor: 'Sara M.',  age: '18m–3 yr',    taken: 1, total: 4, emoji: '🐟' },
+  { id: 1, name: 'Beginner Babies', day: 'Mon', hour: 9, ampm: 'AM', instructor: 'Sara M.', age: '0–18 months', taken: 2, total: 4, emoji: '../assets/baby-solid-full.svg' },
+  { id: 2, name: 'Water Confidence', day: 'Mon', hour: 10, ampm: 'AM', instructor: 'James K.', age: '18m–3 yr', taken: 1, total: 4, emoji: '../assets/water-solid-full.svg' },
+  { id: 3, name: 'Toddler Splash', day: 'Tue', hour: 9, ampm: 'AM', instructor: 'Sara M.', age: '18m–3 yr', taken: 3, total: 4, emoji: '../assets/child-solid-full.svg' },
+  { id: 4, name: 'Confident Swimmers', day: 'Tue', hour: 14, ampm: 'PM', instructor: 'James K.', age: '3–5 years', taken: 4, total: 4, emoji: '../assets/trophy-solid-full.svg' },
+  { id: 5, name: 'Beginner Babies', day: 'Wed', hour: 9, ampm: 'AM', instructor: 'Sara M.', age: '0–18 months', taken: 1, total: 4, emoji: '../assets/baby-solid-full.svg' },
+  { id: 6, name: 'Toddler Splash', day: 'Wed', hour: 14, ampm: 'PM', instructor: 'Sara M.', age: '18m–3 yr', taken: 2, total: 4, emoji: '../assets/child-solid-full.svg' },
+  { id: 7, name: 'Water Confidence', day: 'Thu', hour: 10, ampm: 'AM', instructor: 'James K.', age: '18m–3 yr', taken: 3, total: 4, emoji: '../assets/water-solid-full.svg' },
+  { id: 8, name: 'Confident Swimmers', day: 'Thu', hour: 15, ampm: 'PM', instructor: 'Sara M.', age: '3–5 years', taken: 2, total: 4, emoji: '../assets/trophy-solid-full.svg' },
+  { id: 9, name: 'Beginner Babies', day: 'Sat', hour: 8, ampm: 'AM', instructor: 'James K.', age: '0–18 months', taken: 0, total: 4, emoji: '../assets/baby-solid-full.svg' },
+  { id: 10, name: 'Toddler Splash', day: 'Sat', hour: 10, ampm: 'AM', instructor: 'Sara M.', age: '18m–3 yr', taken: 1, total: 4, emoji: '../assets/child-solid-full.svg' },
 ];
 
 const NAP_TIMES = [{ start: 9, end: 10.5 }, { start: 13, end: 14.5 }];

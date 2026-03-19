@@ -1,6 +1,4 @@
 // register.js
-
-// ── Step navigation ───────────────────────────────────────
 function goToStep(n) {
   [1, 2, 3].forEach(i => {
     document.getElementById(`step-${i}`).style.display = i === n ? 'block' : 'none';
@@ -11,7 +9,6 @@ function goToStep(n) {
   });
 }
 
-// ── Step 1: validate + advance ────────────────────────────
 function reg_step1() {
   const ids = ['err-first','err-last','err-email','err-phone','err-password','err-confirm','err-terms'];
   fClear(ids);
@@ -37,7 +34,6 @@ function reg_step1() {
   setTimeout(() => document.querySelectorAll('#otp-row .otp-input')[0]?.focus(), 80);
 }
 
-// ── Step 2: OTP ───────────────────────────────────────────
 function reg_otp() {
   const code = [...document.querySelectorAll('#otp-row .otp-input')].map(i => i.value).join('');
   fErr('err-otp', '');
@@ -54,14 +50,12 @@ function reg_resend() {
 
 function reg_back() { goToStep(1); }
 
-// ── OTP auto-advance ──────────────────────────────────────
 document.querySelectorAll('#otp-row .otp-input').forEach((input, i, all) => {
   input.addEventListener('input', () => {
     if (input.value.length === 1 && i < all.length - 1) all[i + 1].focus();
   });
 });
 
-// ── Password strength ─────────────────────────────────────
 document.getElementById('reg-password').addEventListener('input', function() {
   const fill = document.getElementById('pwd-fill');
   const lbl  = document.getElementById('pwd-label');
@@ -84,7 +78,6 @@ document.getElementById('reg-password').addEventListener('input', function() {
   lbl.style.color = cfg.c;
 });
 
-// ── Toggle password visibility ────────────────────────────
 function togglePwd(id, btn) {
   const inp = document.getElementById(id);
   inp.type = inp.type === 'password' ? 'text' : 'password';

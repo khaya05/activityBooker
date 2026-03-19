@@ -1,10 +1,8 @@
 // dashboard.js
 
-// ── Greet ─────────────────────────────────────────────────
 const nameEl = document.getElementById('dash-name');
 if (nameEl && APP.user?.first) nameEl.textContent = APP.user.first;
 
-// ── Balance ───────────────────────────────────────────────
 document.getElementById('dash-balance').textContent = APP.lessonBalance;
 
 const child = APP.children[0];

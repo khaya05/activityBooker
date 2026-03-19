@@ -1,16 +1,11 @@
-// book.js
-
-// ─── Read class ID from URL (?id=3) ──────────────────────
 const params = new URLSearchParams(window.location.search);
 const classId = parseInt(params.get('id'));
 const cls = CLASSES.find(c => c.id === classId);
 
-// If no valid class, redirect back
 if (!cls) {
   window.location.href = 'classes.html';
 }
 
-// ─── Helpers ──────────────────────────────────────────────
 function fmt12(cls) {
   const h = cls.hour > 12 ? cls.hour - 12 : cls.hour;
   return `${h}:00 ${cls.ampm}`;
@@ -22,7 +17,6 @@ function capColor(status) {
   return 'var(--ink)';
 }
 
-// ─── Render class card ────────────────────────────────────
 const status = capStatus(cls.taken, cls.total);
 const pct = Math.round(cls.taken / cls.total * 100);
 const nap = napConflict(cls);
@@ -65,7 +59,6 @@ document.getElementById('book-class-card').innerHTML = `
     </div>
   </div>`;
 
-// ─── Render sidebar summary ───────────────────────────────
 document.getElementById('book-summary-card').innerHTML = `
   <div class="bsc-title">Booking summary</div>
   <div class="bsc-row"><span class="bsc-label">Class</span><span class="bsc-val">${cls.emoji} ${cls.name}</span></div>
@@ -77,7 +70,6 @@ document.getElementById('book-summary-card').innerHTML = `
   <div class="bsc-row"><span class="bsc-label">Cost</span><span class="bsc-cost">1 lesson</span></div>
   <div class="bsc-note">Deducted from your balance on confirmation.</div>`;
 
-// ─── Nap conflict warning ─────────────────────────────────
 if (nap) {
   const warn = document.getElementById('book-nap-warn');
   const txt = document.getElementById('book-nap-warn-text');
@@ -87,7 +79,6 @@ if (nap) {
     'You can still book — it\'s just a heads-up.';
 }
 
-// ─── If class is full, disable confirm immediately ────────
 if (full) {
   const btn = document.getElementById('confirm-btn');
   if (btn) {
@@ -98,7 +89,6 @@ if (full) {
   }
 }
 
-// ─── Render children ──────────────────────────────────────
 let selectedChildId = null;
 
 function renderChildren() {
@@ -129,7 +119,6 @@ function renderChildren() {
       </div>
     </div>`).join('');
 
-  // Auto-select first child
   if (!selectedChildId && APP.children.length) {
     selectChild(APP.children[0].id);
   }
@@ -138,7 +127,6 @@ function renderChildren() {
 function selectChild(id) {
   selectedChildId = id;
 
-  // Update selected styles
   document.querySelectorAll('.book-child').forEach(el => el.classList.remove('selected'));
   document.getElementById('bc-' + id)?.classList.add('selected');
 
@@ -154,19 +142,16 @@ function updateBookingState(child) {
   const actions = document.getElementById('book-actions');
   const confirmBtn = document.getElementById('confirm-btn');
 
-  // Update balance display
   const n = APP.lessonBalance;
   balNum.textContent = `${n} lesson${n !== 1 ? 's' : ''}`;
 
-  // Reset
   consentBlocked.style.display = 'none';
   noBalance.style.display = 'none';
   balanceRow.style.display = 'flex';
   actions.style.display = 'flex';
 
-  if (full) return; // already disabled above
+  if (full) return; 
 
-  // Consent pending → hard block
   if (child.consentStatus !== 'ok') {
     consentBlocked.style.display = 'flex';
     confirmBtn.disabled = true;
@@ -175,7 +160,6 @@ function updateBookingState(child) {
     return;
   }
 
-  // No balance → block
   if (APP.lessonBalance < 1) {
     balanceRow.style.display = 'none';
     noBalance.style.display = 'flex';
@@ -185,13 +169,11 @@ function updateBookingState(child) {
     return;
   }
 
-  // All good
   confirmBtn.disabled = false;
   confirmBtn.textContent = 'Confirm — 1 lesson';
   confirmBtn.style.opacity = '1';
 }
 
-// ─── Confirm booking ──────────────────────────────────────
 function confirmBooking() {
   const child = APP.children.find(c => c.id === selectedChildId);
   if (!child) return;
@@ -201,14 +183,11 @@ function confirmBooking() {
   btn.disabled = true;
 
   setTimeout(() => {
-    // Deduct lesson
     APP.lessonBalance = Math.max(0, APP.lessonBalance - 1);
 
-    // Update class capacity
     const live = CLASSES.find(c => c.id === cls.id);
     if (live) live.taken = Math.min(live.total, live.taken + 1);
 
-    // Save booking
     APP.bookings.push({
       id: Date.now(),
       className: cls.name,
@@ -219,7 +198,6 @@ function confirmBooking() {
       emoji: cls.emoji,
     });
 
-    // Show confirmed state
     document.querySelector('.book-layout').style.display = 'none';
     document.getElementById('book-confirmed').style.display = 'block';
 
@@ -227,7 +205,7 @@ function confirmBooking() {
       `${child.name.split(' ')[0]} is booked in for ${cls.emoji} ${cls.name}.`;
 
     document.getElementById('confirmed-detail').innerHTML =
-      `<div class="cd-row"><span>📅</span><span>${cls.day} · ${fmt12(cls)}</span></div>` +
+      `<div class="cd-row"><span><img src="../assets/calendar-days-solid-full.svg" style="height: 2.5rem;"></span><span>${cls.day} · ${fmt12(cls)}</span></div>` +
       `<div class="cd-row"><span>👤</span><span>Instructor: ${cls.instructor}</span></div>` +
       `<div class="cd-row"><span>👶</span><span>${child.name}</span></div>` +
       `<div class="cd-row"><span>🎟</span><span>1 lesson deducted · ${APP.lessonBalance} remaining</span></div>`;
@@ -235,6 +213,4 @@ function confirmBooking() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, 800);
 }
-
-// ─── Init ─────────────────────────────────────────────────
 renderChildren();

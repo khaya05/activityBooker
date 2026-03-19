@@ -1,110 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register — Blue Fin Swim School — ActivityBookr</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
 
-<div class="auth-layout">
-  <a class="auth-brand" href="home.html">Activity<span>Bookr</span></a>
+  <div class="auth-layout">
+    <a class="auth-brand" href="home.html">Activity<span>Bookr</span></a>
 
-  <div class="auth-card">
-    <div class="auth-steps">
-      <div class="auth-step" id="dot-1"><div class="auth-step-circle active" id="circ-1">1</div><div class="auth-step-label">Account</div></div>
-      <div class="auth-step-line"></div>
-      <div class="auth-step" id="dot-2"><div class="auth-step-circle" id="circ-2">2</div><div class="auth-step-label">Verify</div></div>
-      <div class="auth-step-line"></div>
-      <div class="auth-step" id="dot-3"><div class="auth-step-circle" id="circ-3">3</div><div class="auth-step-label">Done</div></div>
-    </div>
-
-    <!-- Step 1 -->
-    <div id="step-1">
-      <div class="auth-card-header">
-        <h2 class="auth-title">Create your account</h2>
-        <p class="auth-sub">Takes less than 2 minutes. No payment needed yet.</p>
+    <div class="auth-card">
+      <div class="auth-steps">
+        <div class="auth-step" id="dot-1">
+          <div class="auth-step-circle active" id="circ-1">1</div>
+          <div class="auth-step-label">Account</div>
+        </div>
+        <div class="auth-step-line"></div>
+        <div class="auth-step" id="dot-2">
+          <div class="auth-step-circle" id="circ-2">2</div>
+          <div class="auth-step-label">Verify</div>
+        </div>
+        <div class="auth-step-line"></div>
+        <div class="auth-step" id="dot-3">
+          <div class="auth-step-circle" id="circ-3">3</div>
+          <div class="auth-step-label">Done</div>
+        </div>
       </div>
-      <div class="form-fields">
-        <div class="form-row">
-          <div class="form-field"><label class="form-label">First name</label><input class="form-input" type="text" id="reg-first" placeholder="Thandi" autocomplete="given-name"><div class="form-error" id="err-first"></div></div>
-          <div class="form-field"><label class="form-label">Last name</label><input class="form-input" type="text" id="reg-last" placeholder="Mokoena" autocomplete="family-name"><div class="form-error" id="err-last"></div></div>
+
+      <!-- Step 1 -->
+      <div id="step-1">
+        <div class="auth-card-header">
+          <h2 class="auth-title">Create your account</h2>
+          <p class="auth-sub">Takes less than 2 minutes. No payment needed yet.</p>
         </div>
-        <div class="form-field"><label class="form-label">Email address</label><input class="form-input" type="email" id="reg-email" placeholder="thandi@email.com" autocomplete="email"><div class="form-error" id="err-email"></div></div>
-        <div class="form-field">
-          <label class="form-label">Phone number</label>
-          <div class="form-input-prefix-wrap"><span class="form-input-prefix">+27</span><input class="form-input form-input-prefixed" type="tel" id="reg-phone" placeholder="82 345 6789" autocomplete="tel"></div>
-          <div class="form-error" id="err-phone"></div>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Password</label>
-          <div class="form-input-icon-wrap">
-            <input class="form-input form-input-iconed" type="password" id="reg-password" placeholder="At least 8 characters" autocomplete="new-password">
-            <button class="form-icon-btn" onclick="togglePwd('reg-password',this)" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <div class="form-fields">
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">First name</label><input class="form-input" type="text"
+                id="reg-first" placeholder="Thandi" autocomplete="given-name">
+              <div class="form-error" id="err-first"></div>
+            </div>
+            <div class="form-field"><label class="form-label">Last name</label><input class="form-input" type="text"
+                id="reg-last" placeholder="Mokoena" autocomplete="family-name">
+              <div class="form-error" id="err-last"></div>
+            </div>
           </div>
-          <div class="pwd-strength"><div class="pwd-bar"><div class="pwd-fill" id="pwd-fill"></div></div><span class="pwd-label" id="pwd-label"></span></div>
-          <div class="form-error" id="err-password"></div>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Confirm password</label>
-          <div class="form-input-icon-wrap">
-            <input class="form-input form-input-iconed" type="password" id="reg-confirm" placeholder="Repeat your password" autocomplete="new-password">
-            <button class="form-icon-btn" onclick="togglePwd('reg-confirm',this)" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <div class="form-field"><label class="form-label">Email address</label><input class="form-input" type="email"
+              id="reg-email" placeholder="thandi@email.com" autocomplete="email">
+            <div class="form-error" id="err-email"></div>
           </div>
-          <div class="form-error" id="err-confirm"></div>
+          <div class="form-field">
+            <label class="form-label">Phone number</label>
+            <div class="form-input-prefix-wrap"><span class="form-input-prefix">+27</span><input
+                class="form-input form-input-prefixed" type="tel" id="reg-phone" placeholder="82 345 6789"
+                autocomplete="tel"></div>
+            <div class="form-error" id="err-phone"></div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Password</label>
+            <div class="form-input-icon-wrap">
+              <input class="form-input form-input-iconed" type="password" id="reg-password"
+                placeholder="At least 8 characters" autocomplete="new-password">
+              <button class="form-icon-btn" onclick="togglePwd('reg-password',this)" tabindex="-1"><svg width="16"
+                  height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg></button>
+            </div>
+            <div class="pwd-strength">
+              <div class="pwd-bar">
+                <div class="pwd-fill" id="pwd-fill"></div>
+              </div><span class="pwd-label" id="pwd-label"></span>
+            </div>
+            <div class="form-error" id="err-password"></div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Confirm password</label>
+            <div class="form-input-icon-wrap">
+              <input class="form-input form-input-iconed" type="password" id="reg-confirm"
+                placeholder="Repeat your password" autocomplete="new-password">
+              <button class="form-icon-btn" onclick="togglePwd('reg-confirm',this)" tabindex="-1"><svg width="16"
+                  height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg></button>
+            </div>
+            <div class="form-error" id="err-confirm"></div>
+          </div>
+          <label class="form-check">
+            <input type="checkbox" id="reg-terms">
+            <span class="form-check-box"></span>
+            <span class="form-check-label">I agree to the <a href="#" class="form-link">Terms of Service</a> and <a
+                href="#" class="form-link">Privacy Policy</a></span>
+          </label>
+          <div class="form-error" id="err-terms"></div>
         </div>
-        <label class="form-check">
-          <input type="checkbox" id="reg-terms">
-          <span class="form-check-box"></span>
-          <span class="form-check-label">I agree to the <a href="#" class="form-link">Terms of Service</a> and <a href="#" class="form-link">Privacy Policy</a></span>
-        </label>
-        <div class="form-error" id="err-terms"></div>
+        <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="reg_step1()">Create account
+          →</button>
+        <div class="auth-switch">Already have an account? <a class="auth-switch-link" href="login.html">Log in</a></div>
       </div>
-      <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="reg_step1()">Create account →</button>
-      <div class="auth-switch">Already have an account? <a class="auth-switch-link" href="login.html">Log in</a></div>
+
+      <!-- Step 2 -->
+      <div id="step-2" style="display:none">
+        <div class="auth-card-header" style="text-align:center">
+          <div style="font-size:48px;margin-bottom:16px"><img src="../assets/envelope-regular-full.svg" alt="" srcset="" style="height: 2.5rem;"></div>
+          <h2 class="auth-title">Check your email</h2>
+          <p class="auth-sub">We sent a 6-digit code to <strong id="email-display"></strong></p>
+        </div>
+        <div class="otp-row" id="otp-row">
+          <input class="otp-input" type="text" maxlength="1">
+          <input class="otp-input" type="text" maxlength="1">
+          <input class="otp-input" type="text" maxlength="1">
+          <input class="otp-input" type="text" maxlength="1">
+          <input class="otp-input" type="text" maxlength="1">
+          <input class="otp-input" type="text" maxlength="1">
+        </div>
+        <div class="form-error" id="err-otp" style="text-align:center;margin-bottom:8px"></div>
+        <button class="btn btn-primary" style="width:100%" onclick="reg_otp()">Verify email →</button>
+        <div class="auth-switch" style="margin-top:16px">Didn't receive it? <button class="auth-switch-link"
+            onclick="reg_resend()">Resend code</button></div>
+        <div class="auth-switch" style="margin-top:4px"><button class="auth-switch-link" onclick="reg_back()">← Change
+            email</button></div>
+        <div class="form-hint" style="text-align:center;margin-top:16px"><span><img src="../assets/lightbulb-regular-full.svg" alt="" srcset="" style="height: 1rem;"></span> Any 6-digit code works in this prototype
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="step-3" style="display:none;text-align:center">
+        <div style="font-size:56px;margin-bottom:20px"><img src="../assets/circle-check-solid-full.svg" alt="" srcset="" style="height: 2.5rem;"></div>
+        <h2 class="auth-title">Account created!</h2>
+        <p class="auth-sub" style="margin-bottom:28px">Welcome to Blue Fin Swim School. Add your child's profile so we
+          can find the right class.</p>
+        <a class="btn btn-primary btn-lg" style="width:100%;display:flex;justify-content:center;margin-bottom:12px"
+          href="add-child.html">Add your child →</a>
+        <a class="btn btn-outline" style="width:100%;display:flex;justify-content:center" href="classes.html">Browse
+          classes first</a>
+      </div>
     </div>
 
-    <!-- Step 2 -->
-    <div id="step-2" style="display:none">
-      <div class="auth-card-header" style="text-align:center">
-        <div style="font-size:48px;margin-bottom:16px">📧</div>
-        <h2 class="auth-title">Check your email</h2>
-        <p class="auth-sub">We sent a 6-digit code to <strong id="email-display"></strong></p>
-      </div>
-      <div class="otp-row" id="otp-row">
-        <input class="otp-input" type="text" maxlength="1">
-        <input class="otp-input" type="text" maxlength="1">
-        <input class="otp-input" type="text" maxlength="1">
-        <input class="otp-input" type="text" maxlength="1">
-        <input class="otp-input" type="text" maxlength="1">
-        <input class="otp-input" type="text" maxlength="1">
-      </div>
-      <div class="form-error" id="err-otp" style="text-align:center;margin-bottom:8px"></div>
-      <button class="btn btn-primary" style="width:100%" onclick="reg_otp()">Verify email →</button>
-      <div class="auth-switch" style="margin-top:16px">Didn't receive it? <button class="auth-switch-link" onclick="reg_resend()">Resend code</button></div>
-      <div class="auth-switch" style="margin-top:4px"><button class="auth-switch-link" onclick="reg_back()">← Change email</button></div>
-      <div class="form-hint" style="text-align:center;margin-top:16px">💡 Any 6-digit code works in this prototype</div>
-    </div>
-
-    <!-- Step 3 -->
-    <div id="step-3" style="display:none;text-align:center">
-      <div style="font-size:56px;margin-bottom:20px">🎉</div>
-      <h2 class="auth-title">Account created!</h2>
-      <p class="auth-sub" style="margin-bottom:28px">Welcome to Blue Fin Swim School. Add your child's profile so we can find the right class.</p>
-      <a class="btn btn-primary btn-lg" style="width:100%;display:flex;justify-content:center;margin-bottom:12px" href="add-child.html">Add your child →</a>
-      <a class="btn btn-outline" style="width:100%;display:flex;justify-content:center" href="classes.html">Browse classes first</a>
-    </div>
+    <div class="auth-footer">Secure sign-up · Powered by ActivityBookr</div>
   </div>
 
-  <div class="auth-footer">Secure sign-up · Powered by ActivityBookr</div>
-</div>
-
-<div class="toast" id="toast"></div>
-<script src="../js/app.js"></script>
-<script src="../js/nav.js"></script>
-<script src="../js/register.js"></script>
+  <div class="toast" id="toast"></div>
+  <script src="../js/app.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/register.js"></script>
 </body>
+
 </html>
