@@ -1,4 +1,4 @@
-import { asyncWrapper } from "../util/asyncWrapper";
+import { asyncWrapper } from "../util/asyncWrapper.js";
 import User from '../models/userModel.js'
 import { StatusCodes } from "http-status-codes";
 
