@@ -9,6 +9,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
+import childRouter from './routes/childRouter.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
 
 const app = express();
@@ -24,7 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 // ─── Routes ───────────────────────────────────────────────
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
-// app.use('/api/v1/children', authenticateUser, childrenRouter);
+app.use('/api/v1/children', authenticateUser, childRouter);
 // app.use('/api/v1/lessons',  authenticateUser, lessonsRouter);
 
 // ─── 404 handler ─────────────────────────────────────────
