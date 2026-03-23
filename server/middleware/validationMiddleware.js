@@ -2,8 +2,8 @@ import { body, param, validationResult } from 'express-validator';
 import { BadRequestError, NotFoundError, Unauthorized } from '../errors/customErrors.js';
 import User from '../models/userModel.js';
 import Child from '../models/childModel.js';
+import Class from '../models/classModel.js';
 
-// ─── Shared wrapper ───────────────────────────────────────
 const validate = (checks) => [
   ...checks,
   (req, res, next) => {
@@ -16,7 +16,6 @@ const validate = (checks) => [
   },
 ];
 
-// ─── Auth ─────────────────────────────────────────────────
 export const validateRegisterUser = validate([
   body('name').trim().notEmpty().withMessage('Name is required'),
 
@@ -52,7 +51,6 @@ export const validateLoginUser = validate([
   body('password').notEmpty().withMessage('Password is required'),
 ]);
 
-// ─── Child ────────────────────────────────────────────────
 export const validateCreateChild = validate([
   body('name').trim().notEmpty().withMessage("Child's first name is required"),
 
@@ -122,13 +120,11 @@ export const validateUpdateChild = validate([
   body('additionalInfo').optional().trim(),
 ]);
 
-// ─── Route params ─────────────────────────────────────────
 export const validateMongoId = (paramName = 'id') =>
   validate([
     param(paramName).isMongoId().withMessage(`Invalid ${paramName}`),
   ]);
 
-// ─── Child ownership ──────────────────────────────────────
 export const validateChildOwnership = async (req, res, next) => {
   try {
     const child = await Child.findById(req.params.id);
@@ -140,5 +136,70 @@ export const validateChildOwnership = async (req, res, next) => {
     next();
   } catch {
     next(new NotFoundError('Child not found'));
+  }
+};
+
+export const validateClass = validate([
+  body('name').trim().notEmpty().withMessage('Class name is required'),
+
+  body('ageGroup').trim().notEmpty().withMessage('Age group is required'),
+
+  body('dayOfWeek')
+    .notEmpty().withMessage('Day of week is required')
+    .isIn(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+    .withMessage('Invalid day of week'),
+
+  body('startTime')
+    .notEmpty().withMessage('Start time is required')
+    .matches(/^\d{2}:\d{2}$/).withMessage('Start time must be in HH:MM format'),
+
+  body('duration')
+    .optional()
+    .isInt({ min: 1 }).withMessage('Duration must be a positive number'),
+
+  body('instructor')
+    .notEmpty().withMessage('Instructor is required')
+    .isMongoId().withMessage('Invalid instructor ID'),
+
+  body('capacity')
+    .optional()
+    .isInt({ min: 1, max: 20 }).withMessage('Capacity must be between 1 and 20'),
+
+  body('price')
+    .notEmpty().withMessage('Price is required')
+    .isFloat({ min: 0 }).withMessage('Price must be a positive number'),
+
+  body('icon').optional().trim(),
+  body('isActive').optional().isBoolean().withMessage('isActive must be a boolean'),
+]);
+
+export const validateUpdateClass = validate([
+  param('id').isMongoId().withMessage('Invalid class ID'),
+
+  body('name').optional().trim().notEmpty().withMessage('Class name cannot be empty'),
+  body('ageGroup').optional().trim().notEmpty().withMessage('Age group cannot be empty'),
+  body('dayOfWeek')
+    .optional()
+    .isIn(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+    .withMessage('Invalid day of week'),
+  body('startTime')
+    .optional()
+    .matches(/^\d{2}:\d{2}$/).withMessage('Start time must be in HH:MM format'),
+  body('duration').optional().isInt({ min: 1 }).withMessage('Duration must be a positive number'),
+  body('instructor').optional().isMongoId().withMessage('Invalid instructor ID'),
+  body('capacity').optional().isInt({ min: 1, max: 20 }).withMessage('Capacity must be between 1 and 20'),
+  body('price').optional().isFloat({ min: 0 }).withMessage('Price must be a positive number'),
+  body('icon').optional().trim(),
+  body('isActive').optional().isBoolean().withMessage('isActive must be a boolean'),
+]);
+
+export const validateClassExists = async (req, res, next) => {
+  try {
+    const cls = await Class.findById(req.params.id);
+    if (!cls) return next(new NotFoundError('Class not found'));
+    req.cls = cls;
+    next();
+  } catch {
+    next(new NotFoundError('Class not found'));
   }
 };
