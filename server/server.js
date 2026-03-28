@@ -12,11 +12,11 @@ import userRouter from './routes/userRouter.js';
 import childRouter from './routes/childRouter.js';
 import classRouter from './routes/classRouter.js';
 import bookingRouter from './routes/bookingRouter.js';
+import purchaseRouter from './routes/purchaseRouter.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
 
 const app = express();
 
-// ─── Global middleware ────────────────────────────────────
 app.use(express.json());
 app.use(cookieParser());
 
@@ -30,14 +30,11 @@ app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/children', authenticateUser, childRouter);
 app.use('/api/v1/classes', classRouter);
 app.use('/api/v1/bookings', authenticateUser, bookingRouter);
-// app.use('/api/v1/lessons',  authenticateUser, lessonsRouter);
+app.use('/api/v1/purchases', authenticateUser, purchaseRouter);
 
-// ─── 404 handler ─────────────────────────────────────────
 app.use('*', (req, res) => {
   res.status(StatusCodes.NOT_FOUND).json({ msg: 'Route not found' });
 });
-
-// ─── Global error handler ─────────────────────────────────
 app.use((err, req, res, next) => {
   const status = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
   const message = err.message || 'Something went wrong';
