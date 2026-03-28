@@ -7,7 +7,7 @@ export const getClasses = asyncWrapper(async (req, res) => {
     .populate('instructor', 'name lastName')
     .sort({ dayOfWeek: 1, startTime: 1 });
 
-  res.status(StatusCodes.OK).json({ classes, count: classes.length });
+  res.status(StatusCodes.OK).json({ count: classes.length, classes });
 });
 
 export const getClass = asyncWrapper(async (req, res) => {

@@ -29,7 +29,7 @@ const ClassSchema = new mongoose.Schema(
     duration: {
       type: Number,
       required: true,
-      default: 30,  // minutes
+      default: 30, 
     },
     instructor: {
       type: mongoose.Schema.Types.ObjectId,
@@ -47,7 +47,7 @@ const ClassSchema = new mongoose.Schema(
     },
     isActive: {
       type: Boolean,
-      default: true,  // admin can deactivate without deleting
+      default: true, 
     },
   },
   { timestamps: true }

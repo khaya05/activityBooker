@@ -11,6 +11,7 @@ import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
 import childRouter from './routes/childRouter.js';
 import classRouter from './routes/classRouter.js';
+import bookingRouter from './routes/bookingRouter.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/children', authenticateUser, childRouter);
 app.use('/api/v1/classes', classRouter);
+app.use('/api/v1/bookings', authenticateUser, bookingRouter);
 // app.use('/api/v1/lessons',  authenticateUser, lessonsRouter);
 
 // ─── 404 handler ─────────────────────────────────────────
