@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: true,
       trim: true,
+      default: '',
     },
     email: {
       type: String,
@@ -21,11 +21,12 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      select: false,         // never returned in queries by default
+      // NOT required — Google auth users have no password
     },
     phoneNumber: {
       type: String,
-      required: true,
+      default: '',
     },
     role: {
       type: String,
@@ -43,8 +44,40 @@ const UserSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
+
+    // ─── Email verification ──────────────────────────────
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    verificationCode: {
+      type: String,
+      select: false,
+    },
+    verificationCodeExpires: {
+      type: Date,
+      select: false,
+    },
+
+    // ─── Google auth ─────────────────────────────────────
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    authProvider: {
+      type: String,
+      enum: ['email', 'google'],
+      default: 'email',
+    },
   },
   { timestamps: true }
 );
+
+UserSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 export default mongoose.model('User', UserSchema);

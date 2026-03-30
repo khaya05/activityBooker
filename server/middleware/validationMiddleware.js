@@ -100,6 +100,23 @@ export const validateCreateChild = validate([
   body('additionalInfo').optional().trim(),
 ]);
 
+export const validateVerifyEmail = validate([
+  body('email')
+    .trim().notEmpty().withMessage('Email is required')
+    .isEmail().withMessage('Invalid email address'),
+
+  body('code')
+    .trim().notEmpty().withMessage('Verification code is required')
+    .isLength({ min: 6, max: 6 }).withMessage('Verification code must be 6 digits')
+    .isNumeric().withMessage('Verification code must contain only digits'),
+]);
+
+export const validateResendVerification = validate([
+  body('email')
+    .trim().notEmpty().withMessage('Email is required')
+    .isEmail().withMessage('Invalid email address'),
+]);
+
 export const validateUpdateChild = validate([
   param('id').isMongoId().withMessage('Invalid child ID'),
 

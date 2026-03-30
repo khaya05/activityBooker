@@ -1,36 +1,38 @@
 // purchase.js
 
-const PACKS = {
-  trial: { name: 'Trial lesson', lessons: 1, price: 95 },
-  single: { name: 'Single lesson', lessons: 1, price: 120 },
-  '4pack': { name: '4-lesson pack', lessons: 4, price: 440 },
-  '8pack': { name: '8-lesson pack', lessons: 8, price: 800 },
-};
+async function initPurchase() {
+  showLoader();
+  const ok = await APP.requireAuth();
+  if (!ok) return;
 
-const childName = APP.children[0]?.name.split(' ')[0] || 'your child';
+  APP.updateNav();
 
-document.getElementById('balance-num').textContent = APP.lessonBalance;
-document.getElementById('balance-child').textContent = APP.children[0]?.name || 'No child added';
+  document.getElementById('balance-num').textContent = APP.lessonBalance;
 
-document.querySelectorAll('input[name="pack"]').forEach(radio => {
-  radio.addEventListener('change', () => updateSummary(radio));
-});
+  const childName = APP.children[0]?.name.split(' ')[0] || 'your child';
 
-const defaultPack = document.querySelector('input[name="pack"]:checked');
-if (defaultPack) updateSummary(defaultPack);
+  document.querySelectorAll('input[name="pack"]').forEach(radio => {
+    radio.addEventListener('change', () => updateSummary(radio, childName));
+  });
 
-function updateSummary(radio) {
-  const pack = PACKS[radio.value];
-  if (!pack) return;
+  const defaultPack = document.querySelector('input[name="pack"]:checked');
+  if (defaultPack) updateSummary(defaultPack, childName);
 
-  document.getElementById('order-desc').textContent = `${pack.name} · ${childName}`;
-  document.getElementById('order-price').textContent = `R${pack.price}`;
-  document.getElementById('order-total').textContent = `R${pack.price}`;
+  hideLoader();
+}
+
+function updateSummary(radio, childName = 'your child') {
+  const price = radio.dataset.price;
+  const lessons = radio.dataset.lessons;
+  const name = radio.closest('.pack-select-card').querySelector('.psc-name').textContent;
+
+  document.getElementById('order-desc').textContent = `${name} · ${childName}`;
+  document.getElementById('order-price').textContent = `R${price}`;
+  document.getElementById('order-total').textContent = `R${price}`;
   document.getElementById('order-note').textContent =
-    `${pack.lessons} lesson${pack.lessons > 1 ? 's' : ''} will be added to ${childName}'s balance`;
-  document.getElementById('pay-amount').textContent = `R${pack.price}`;
+    `${lessons} lesson${lessons > 1 ? 's' : ''} will be added to your balance`;
+  document.getElementById('pay-amount').textContent = `R${price}`;
 
-  // Update check marks
   document.querySelectorAll('.psc-check').forEach(c => c.classList.remove('checked'));
   radio.closest('.pack-select-card').querySelector('.psc-check').classList.add('checked');
 }
@@ -45,37 +47,44 @@ function formatExpiry(input) {
   input.value = digits.length > 2 ? digits.slice(0, 2) + ' / ' + digits.slice(2) : digits;
 }
 
-function submitPayment() {
-  ['card-number', 'card-expiry', 'card-cvc', 'card-name', 'payment'].forEach(k => fErr('err-' + k, ''));
+async function submitPayment() {
+  fClear(['err-card-number', 'err-card-expiry', 'err-card-cvc', 'err-card-name', 'err-payment']);
 
   const num = document.getElementById('card-number').value.replace(/\s/g, '');
   const expiry = document.getElementById('card-expiry').value;
   const cvc = document.getElementById('card-cvc').value.trim();
   const name = document.getElementById('card-name').value.trim();
+  const radio = document.querySelector('input[name="pack"]:checked');
 
   let ok = true;
   if (num.length < 16) { fErr('err-card-number', 'Enter a valid 16-digit card number'); ok = false; }
   if (expiry.length < 7) { fErr('err-card-expiry', 'Enter a valid expiry date'); ok = false; }
   if (cvc.length < 3) { fErr('err-card-cvc', 'Enter a valid CVC'); ok = false; }
   if (!name) { fErr('err-card-name', 'Enter the name on your card'); ok = false; }
+  if (!radio) { notify('Please select a pack.', 'warning'); ok = false; }
   if (!ok) return;
 
   const btn = document.getElementById('pay-btn');
   btn.textContent = 'Processing…';
   btn.disabled = true;
+  showLoader();
 
-  setTimeout(() => {
-    const radio = document.querySelector('input[name="pack"]:checked');
-    const pack = PACKS[radio?.value] || PACKS['4pack'];
+  try {
+    const data = await Purchases.create({ pack: radio.value });
 
-    APP.lessonBalance += pack.lessons;
+    APP.lessonBalance = data.newLessonBalance;
+    const lessons = radio.dataset.lessons;
 
-    document.getElementById('balance-num').textContent = APP.lessonBalance;
-    btn.textContent = `Pay R${pack.price} →`;
-    btn.disabled = false;
-
-    sessionStorage.setItem('toast', `✓ ${pack.lessons} lesson${pack.lessons > 1 ? 's' : ''} added to your balance!`);
+    sessionStorage.setItem('toast', `✓ ${lessons} lesson${lessons > 1 ? 's' : ''} added to your balance!`);
     sessionStorage.setItem('toastType', 'success');
     window.location.href = 'dashboard.html';
-  }, 1400);
+  } catch (err) {
+    notify(err.message, 'error');
+    fErr('err-payment', err.message);
+    btn.textContent = `Pay R${radio.dataset.price} →`;
+    btn.disabled = false;
+    hideLoader();
+  }
 }
+
+initPurchase();

@@ -24,8 +24,14 @@
           <a class="nav-link" href="classes.html">Classes</a>
         </div>
         <div class="nav-actions">
-          <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
-          <a class="nav-cta" href="register.html">Get Started</a>
+          <a class="btn btn-outline btn-sm" href="login.html" data-auth="guest">Log in</a>
+          <a class="nav-cta" href="register.html" data-auth="guest">Get Started</a>
+
+          <span class="nav-user-name" data-auth="user" data-nav-name
+            style="font-size:.85rem;color:var(--ink-3);font-weight:500"></span>
+          <a class="nav-cta" href="dashboard.html" data-auth="user">Dashboard</a>
+          <button class="btn btn-outline btn-sm" data-auth="user" onclick="APP.logout()">Log out</button>
+
           <div class="nav-hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
           </div>
@@ -40,6 +46,10 @@
     <a class="mobile-menu-link" href="pricing.html">Pricing</a>
     <a class="mobile-menu-link" href="classes.html">Classes</a>
     <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+    <a class="mobile-menu-link" href="login.html" data-auth="guest">Log in</a>
+    <a class="mobile-menu-link" href="dashboard.html" data-auth="user">Dashboard</a>
+    <button class="mobile-menu-link" data-auth="user" onclick="APP.logout()"
+      style="background:none;border:none;text-align:left;cursor:pointer;width:100%">Log out</button>
   </div>
 
   <section class="page-hero">
@@ -78,7 +88,7 @@
       <p style="font-size:15px;color:var(--ink-3);max-width:500px;line-height:1.65;margin-bottom:40px">Each class is
         structured around developmental milestones specific to your child's age group.</p>
       <div class="age-groups-grid">
-        <div class="age-card animate">          <img src="../assets/baby-solid-full.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="age-card animate"> <img src="../assets/baby-solid-full.svg" alt="" srcset="" style="height: 3rem;">
 
           <div class="age-card-range">0–6 months</div>
           <div class="age-card-name">Water Babies</div>
@@ -86,7 +96,8 @@
           <div class="age-outcome">Breath control introduction</div>
           <div class="age-outcome">Parent confidence building</div>
         </div>
-        <div class="age-card animate" style="animation-delay:.1s"><img src="../assets/water-solid-full.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="age-card animate" style="animation-delay:.1s"><img src="../assets/water-solid-full.svg" alt=""
+            srcset="" style="height: 3rem;">
           <div class="age-card-range">6–18 months</div>
           <div class="age-card-name">Little Splashers</div>
           <div class="age-outcome">Floating with support</div>
@@ -94,7 +105,8 @@
           <div class="age-outcome">Submerging comfortably</div>
           <div class="age-outcome">Pool edge safety</div>
         </div>
-        <div class="age-card animate" style="animation-delay:.2s"><img src="../assets/frog-solid-full.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="age-card animate" style="animation-delay:.2s"><img src="../assets/frog-solid-full.svg" alt=""
+            srcset="" style="height: 3rem;">
           <div class="age-card-range">18m–3 years</div>
           <div class="age-card-name">Tadpoles</div>
           <div class="age-outcome">Unassisted floating</div>
@@ -102,7 +114,8 @@
           <div class="age-outcome">Jump and recover from edge</div>
           <div class="age-outcome">Basic breath control</div>
         </div>
-        <div class="age-card animate" style="animation-delay:.3s"><img src="../assets/trophy-solid-full.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="age-card animate" style="animation-delay:.3s"><img src="../assets/trophy-solid-full.svg" alt=""
+            srcset="" style="height: 3rem;">
           <div class="age-card-range">3–5 years</div>
           <div class="age-card-name">Confident Swimmers</div>
           <div class="age-outcome">Independent freestyle stroke</div>
@@ -121,17 +134,20 @@
       <p style="font-size:15px;color:var(--ink-3);max-width:500px;line-height:1.65;margin-bottom:40px">Every class is
         designed with child safety as the primary concern.</p>
       <div class="safety-grid">
-        <div class="safety-card animate"><img src="../assets/stethoscope-solid-full.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="safety-card animate"><img src="../assets/stethoscope-solid-full.svg" alt="" srcset=""
+            style="height: 3rem;">
           <div class="safety-card-title">Medically cleared instructors</div>
           <div class="safety-card-text">All instructors are First Aid certified and hold up-to-date CPR training.
             Recertified annually.</div>
         </div>
-        <div class="safety-card animate" style="animation-delay:.1s;background:var(--ink-2)"><img src="../assets/eye-solid-full.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="safety-card animate" style="animation-delay:.1s;background:var(--ink-2)"><img
+            src="../assets/eye-solid-full.svg" alt="" srcset="" style="height: 3rem;">
           <div class="safety-card-title">4:1 maximum ratio</div>
           <div class="safety-card-text">Never more than 4 children per instructor. A hard cap enforced by the booking
             system.</div>
         </div>
-        <div class="safety-card animate" style="animation-delay:.2s;background:var(--ink-3)"><img src="../assets/clipboard-list-solid-full-white.svg" alt="" srcset="" style="height: 3rem;">
+        <div class="safety-card animate" style="animation-delay:.2s;background:var(--ink-3)"><img
+            src="../assets/clipboard-list-solid-full-white.svg" alt="" srcset="" style="height: 3rem;">
           <div class="safety-card-title">Consent &amp; medical forms</div>
           <div class="safety-card-text">Every child requires a signed consent form before their first class. Medical
             notes shared with instructors before each session.</div>

@@ -1,11 +1,21 @@
 import { Router } from 'express';
+import {
+  register,
+  verifyEmail,
+  resendVerificationCode,
+  login,
+  googleAuth,
+  logout,
+} from '../controllers/authController.js';
 import { validateLoginUser, validateRegisterUser } from '../middleware/validationMiddleware.js';
-import { login, logout, register } from '../controllers/authController.js';
 
 const router = Router();
 
 router.post('/register', validateRegisterUser, register);
 router.post('/login', validateLoginUser, login);
-router.post('/logout', logout);             
+router.post('/verify-email', verifyEmail);
+router.post('/resend-verification', resendVerificationCode);
+router.post('/google', googleAuth);
+router.get('/logout', logout);
 
 export default router;

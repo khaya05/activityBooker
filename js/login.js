@@ -1,34 +1,55 @@
-// login.js
+(async function checkAlreadyLoggedIn() {
+  const ok = await APP.init();
+  if (ok) window.location.href = 'dashboard.html';
+})();
 
 function showPanel(id) {
   ['login-main', 'login-forgot', 'login-reset-sent'].forEach(s => {
     document.getElementById(s).style.display = s === id ? 'block' : 'none';
   });
 }
-
 function showForgot() { showPanel('login-forgot'); }
 function hideForgot() { showPanel('login-main'); }
 
-function login_submit() {
+async function login_submit() {
   fClear(['err-email', 'err-password']);
   fErr('err-general', '');
 
   const email = fv('login-email');
-  const pwd = fv('login-password');
+  const password = fv('login-password');
+
   let ok = true;
   if (!email || !email.includes('@')) { fErr('err-email', 'Enter a valid email address'); ok = false; }
-  if (!pwd) { fErr('err-password', 'Password is required'); ok = false; }
+  if (!password) { fErr('err-password', 'Password is required'); ok = false; }
   if (!ok) return;
 
   const btn = document.getElementById('login-btn');
   btn.textContent = 'Logging in…';
   btn.disabled = true;
+  showLoader();
 
-  setTimeout(() => {
+  try {
+    const data = await Auth.login({ email, password });
+
     APP.isLoggedIn = true;
-    APP.user = { first: email.split('@')[0], email };
-    window.location.href = 'dashboard.html';
-  }, 900);
+    APP.user = { first: data.user.name, email: data.user.email, role: data.user.role, id: data.user.userId };
+
+    const redirect = sessionStorage.getItem('redirectAfterLogin') || 'dashboard.html';
+    sessionStorage.removeItem('redirectAfterLogin');
+    window.location.href = redirect;
+
+  } catch (err) {
+    hideLoader();
+    btn.textContent = 'Log in →';
+    btn.disabled = false;
+
+    if (err.data?.requiresVerification) {
+      notify('Please verify your email before logging in.', 'warning');
+      return;
+    }
+    fErr('err-general', err.message);
+    notify(err.message, 'error');
+  }
 }
 
 function login_demo() {

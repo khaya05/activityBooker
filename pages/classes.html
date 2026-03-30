@@ -24,8 +24,14 @@
           <a class="nav-link  active" href="classes.html">Classes</a>
         </div>
         <div class="nav-actions">
-          <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
-          <a class="nav-cta" href="register.html">Get Started</a>
+          <a class="btn btn-outline btn-sm" href="login.html" data-auth="guest">Log in</a>
+          <a class="nav-cta" href="register.html" data-auth="guest">Get Started</a>
+
+          <span class="nav-user-name" data-auth="user" data-nav-name
+            style="font-size:.85rem;color:var(--ink-3);font-weight:500"></span>
+          <a class="nav-cta" href="dashboard.html" data-auth="user">Dashboard</a>
+          <button class="btn btn-outline btn-sm" data-auth="user" onclick="APP.logout()">Log out</button>
+
           <div class="nav-hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
           </div>
@@ -40,6 +46,10 @@
     <a class="mobile-menu-link" href="pricing.html">Pricing</a>
     <a class="mobile-menu-link" href="classes.html">Classes</a>
     <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+    <a class="mobile-menu-link" href="login.html" data-auth="guest">Log in</a>
+    <a class="mobile-menu-link" href="dashboard.html" data-auth="user">Dashboard</a>
+    <button class="mobile-menu-link" data-auth="user" onclick="APP.logout()"
+      style="background:none;border:none;text-align:left;cursor:pointer;width:100%">Log out</button>
   </div>
 
   <section class="classes-page-hero">
@@ -98,15 +108,6 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="nap-notice" id="nap-notice">
-      <div class="nap-notice-icon">🌙</div>
-      <div class="nap-notice-text"><strong>Amara's nap times:</strong> 9:00–10:30 AM and 1:00–2:30 PM. Classes that
-        overlap are marked — you can still book any slot.</div>
-      <button class="nap-notice-dismiss" id="nap-dismiss">×</button>
-    </div>
-  </div>
-
   <div class="container" style="padding-bottom:80px">
     <div class="classes-results-bar">
       <div class="classes-count" id="classes-count"></div>
@@ -147,6 +148,8 @@
     </div>
   </footer>
   <div class="toast" id="toast"></div>
+
+  <script src="../js/api.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/classes.js"></script>

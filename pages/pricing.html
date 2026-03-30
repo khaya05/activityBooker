@@ -24,8 +24,14 @@
           <a class="nav-link" href="classes.html">Classes</a>
         </div>
         <div class="nav-actions">
-          <a class="btn btn-outline btn-sm" href="login.html">Log in</a>
-          <a class="nav-cta" href="register.html">Get Started</a>
+          <a class="btn btn-outline btn-sm" href="login.html" data-auth="guest">Log in</a>
+          <a class="nav-cta" href="register.html" data-auth="guest">Get Started</a>
+
+          <span class="nav-user-name" data-auth="user" data-nav-name
+            style="font-size:.85rem;color:var(--ink-3);font-weight:500"></span>
+          <a class="nav-cta" href="dashboard.html" data-auth="user">Dashboard</a>
+          <button class="btn btn-outline btn-sm" data-auth="user" onclick="APP.logout()">Log out</button>
+
           <div class="nav-hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
           </div>
@@ -40,6 +46,10 @@
     <a class="mobile-menu-link" href="pricing.html">Pricing</a>
     <a class="mobile-menu-link" href="classes.html">Classes</a>
     <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+    <a class="mobile-menu-link" href="login.html" data-auth="guest">Log in</a>
+    <a class="mobile-menu-link" href="dashboard.html" data-auth="user">Dashboard</a>
+    <button class="mobile-menu-link" data-auth="user" onclick="APP.logout()"
+      style="background:none;border:none;text-align:left;cursor:pointer;width:100%">Log out</button>
   </div>
 
   <section class="pricing-hero">

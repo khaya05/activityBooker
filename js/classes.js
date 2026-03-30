@@ -1,12 +1,43 @@
-// classes.js
+// classes.js — loads real classes from API, falls back to empty
 
 const state = { day: 'all', time: 'all', availOnly: false };
+let LIVE_CLASSES = [];
+
+async function initClasses() {
+  showLoader();
+
+  // Silently try to get auth state for nap-time display
+  await APP.init();
+  APP.updateNav();
+
+  try {
+    const data = await Classes.getAll();
+    LIVE_CLASSES = (data.classes || []).map(c => ({
+      _id: c._id,
+      name: c.name,
+      day: c.dayOfWeek.slice(0, 3), // 'Monday' → 'Mon'
+      hour: parseInt(c.startTime.split(':')[0]),
+      ampm: parseInt(c.startTime.split(':')[0]) >= 12 ? 'PM' : 'AM',
+      instructor: c.instructor ? `${c.instructor.name} ${c.instructor.lastName}` : '—',
+      age: c.ageGroup,
+      taken: c.enrolled || 0,
+      total: c.capacity,
+      icon: c.icon || '',
+      price: c.price,
+    }));
+  } catch {
+    notify('Could not load classes. Please refresh.', 'error');
+  } finally {
+    hideLoader();
+    render();
+  }
+}
 
 function render() {
   const list = document.getElementById('classes-list');
   const countEl = document.getElementById('classes-count');
 
-  const filtered = CLASSES.filter(c => {
+  const filtered = LIVE_CLASSES.filter(c => {
     if (state.day !== 'all' && c.day !== state.day) return false;
     if (state.time === 'morning' && c.hour >= 12) return false;
     if (state.time === 'afternoon' && c.hour < 12) return false;
@@ -18,9 +49,7 @@ function render() {
 
   if (!filtered.length) {
     list.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--ink-4)">
-      <div style="font-size:36px;margin-bottom:10px">
-        <img src="../assets/magnifying-glass-solid-full.svg" alt="" srcset="" style="height: 2.5rem;">
-      </div>
+      <div style="margin-bottom:10px"><img src="../assets/magnifying-glass-solid-full.svg" alt="" style="height:2.5rem"></div>
       <div style="font-family:var(--font-mono);font-size:13px">No classes match your filters.</div>
       <button class="btn btn-outline btn-sm" style="margin-top:14px" onclick="resetFilters()">Clear filters</button>
     </div>`;
@@ -29,13 +58,12 @@ function render() {
 
   list.innerHTML = filtered.map(c => {
     const status = capStatus(c.taken, c.total);
-    const nap = napConflict(c);
     const full = status === 'full';
     const pct = Math.round(c.taken / c.total * 100);
     const clr = full ? '#991B1B' : status === 'nearly' ? '#B45309' : 'var(--ink)';
     const h12 = c.hour > 12 ? c.hour - 12 : c.hour;
 
-    return `<div class="class-row${nap ? ' nap-conflict' : ''}${full ? ' class-full' : ''}">
+    return `<div class="class-row${full ? ' class-full' : ''}">
       <div class="class-row-time">
         <div class="class-row-hour">${h12}:00</div>
         <div class="class-row-ampm">${c.ampm}</div>
@@ -43,10 +71,7 @@ function render() {
       </div>
       <div class="class-row-sep"></div>
       <div class="class-row-body">
-        <div class="class-row-name">
-          <img src= ${c.emoji} style="width: 1.3rem" > ${c.name}
-          ${nap ? '<span class="nap-badge">🌙 Nap conflict</span>' : ''}
-        </div>
+        <div class="class-row-name">${c.name}</div>
         <div class="class-row-meta">${c.age} · 30 min · ${c.instructor}</div>
         <div class="cap-bar-wrap" style="margin-bottom:0">
           <div class="cap-bar"><div class="cap-fill" style="width:${pct}%;background:${clr}"></div></div>
@@ -54,10 +79,10 @@ function render() {
         </div>
       </div>
       <div class="class-row-action">
-        <div style="font-family:var(--font-mono);font-size:13px;font-weight:600">R120</div>
+        <div style="font-family:var(--font-mono);font-size:13px;font-weight:600">R${c.price}</div>
         ${full
-        ? `<button class="btn btn-outline btn-sm" onclick="joinWaitlist(${c.id})">Join waitlist</button>`
-        : `<button class="btn btn-primary btn-sm" onclick="bookClass(${c.id})">${nap ? 'Book anyway' : 'Book class'}</button>`}
+        ? `<button class="btn btn-outline btn-sm" onclick="joinWaitlist('${c._id}')">Join waitlist</button>`
+        : `<button class="btn btn-primary btn-sm" onclick="bookClass('${c._id}')">Book class</button>`}
       </div>
     </div>`;
   }).join('');
@@ -89,18 +114,17 @@ function wireFilters() {
     render();
   });
 
-  document.getElementById('nap-dismiss').addEventListener('click', () => {
+  document.getElementById('nap-dismiss')?.addEventListener('click', () => {
     document.getElementById('nap-notice').style.display = 'none';
   });
 }
 
 function resetFilters() {
   state.day = 'all'; state.time = 'all'; state.availOnly = false;
-  document.querySelectorAll('#day-filters  .filter-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+  document.querySelectorAll('#day-filters .filter-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
   document.querySelectorAll('#time-filters .filter-chip').forEach((c, i) => c.classList.toggle('active', i === 0));
   const t = document.getElementById('avail-toggle');
-  t.textContent = 'All classes';
-  t.classList.add('active');
+  t.textContent = 'All classes'; t.classList.add('active');
   render();
 }
 
@@ -109,8 +133,8 @@ function bookClass(id) {
 }
 
 function joinWaitlist(id) {
-  showToast("Added to waitlist — we'll notify you when a spot opens.", 'info');
+  notify("Added to waitlist — we'll notify you when a spot opens.", 'info');
 }
 
 wireFilters();
-render();
+initClasses();

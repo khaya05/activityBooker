@@ -1,10 +1,15 @@
 import { asyncWrapper } from '../util/asyncWrapper.js';
-import { comparePassword, generateVerificationCode, hashedPassword } from '../util/passwordUtil.js';
-import { createToken, verifyJWT } from '../util/tokenUtil.js';
+import { comparePassword, hashedPassword } from '../util/passwordUtil.js';
+import { createToken } from '../util/tokenUtil.js';
 import User from '../models/userModel.js';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, NotFoundError, UnauthenticatedError } from '../errors/customErrors.js';
 import { sendVerificationEmail, sendWelcomeEmail } from '../services/emailService.js';
+
+// ─── Sync helper — defined here to avoid any import confusion ─
+function generateVerificationCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
 
 function setAuthCookie(res, token) {
   res.cookie('token', token, {
@@ -15,17 +20,19 @@ function setAuthCookie(res, token) {
   });
 }
 
+// ─── Register ──────────────────────────────────────────────
 export const register = asyncWrapper(async (req, res) => {
   const { password, ...rest } = req.body;
 
-  const verificationCode = generateVerificationCode();
-  const verificationCodeExpires = new Date(Date.now() + 10 * 60 * 1000); 
+  const verificationCode = generateVerificationCode(); // sync — plain string
+  const verificationCodeExpires = new Date(Date.now() + 10 * 60 * 1000);
 
   const user = await User.create({
     ...rest,
     password: await hashedPassword(password),
     verificationCode,
     verificationCodeExpires,
+    emailVerified: false,
     authProvider: 'email',
   });
 
@@ -48,6 +55,7 @@ export const register = asyncWrapper(async (req, res) => {
   });
 });
 
+// ─── Verify email ──────────────────────────────────────────
 export const verifyEmail = asyncWrapper(async (req, res) => {
   const { email, code } = req.body;
 
@@ -56,15 +64,12 @@ export const verifyEmail = asyncWrapper(async (req, res) => {
   );
 
   if (!user) throw new NotFoundError('User not found');
-
   if (user.emailVerified) {
     return res.status(StatusCodes.OK).json({ message: 'Email already verified.' });
   }
-
   if (!user.verificationCode || user.verificationCodeExpires < new Date()) {
     throw new BadRequestError('Verification code has expired. Request a new one.');
   }
-
   if (user.verificationCode !== code) {
     throw new BadRequestError('Invalid verification code.');
   }
@@ -90,9 +95,9 @@ export const verifyEmail = asyncWrapper(async (req, res) => {
   });
 });
 
+// ─── Resend verification ───────────────────────────────────
 export const resendVerificationCode = asyncWrapper(async (req, res) => {
   const { email } = req.body;
-
   const user = await User.findOne({ email: email.toLowerCase() });
 
   if (!user) throw new NotFoundError('User not found');
@@ -104,18 +109,15 @@ export const resendVerificationCode = asyncWrapper(async (req, res) => {
   await user.save();
 
   sendVerificationEmail(email, verificationCode).catch((err) =>
-    console.error('[auth] Resend verification email failed:', err?.message)
+    console.error('[auth] Resend failed:', err?.message)
   );
 
-  res.status(StatusCodes.OK).json({
-    success: true,
-    message: 'Verification code sent to your email.',
-  });
+  res.status(StatusCodes.OK).json({ success: true, message: 'Verification code sent.' });
 });
 
+// ─── Login ─────────────────────────────────────────────────
 export const login = asyncWrapper(async (req, res) => {
   const { email, password } = req.body;
-
   const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
 
   const isValid = user && (await comparePassword(password, user.password));
@@ -145,6 +147,7 @@ export const login = asyncWrapper(async (req, res) => {
   });
 });
 
+// ─── Google auth ───────────────────────────────────────────
 export const googleAuth = asyncWrapper(async (req, res) => {
   const { googleId, name, email } = req.body;
 
@@ -189,6 +192,7 @@ export const googleAuth = asyncWrapper(async (req, res) => {
   });
 });
 
+// ─── Logout ────────────────────────────────────────────────
 export const logout = (req, res) => {
   res.cookie('token', 'logout', {
     httpOnly: true,

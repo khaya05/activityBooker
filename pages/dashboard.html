@@ -30,12 +30,17 @@
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobile-menu">
-  <a class="mobile-menu-link" href="home.html">Home</a>
-  <a class="mobile-menu-link" href="classes.html">Classes</a>
-  <a class="mobile-menu-link" href="purchase.html">Buy Lessons</a>
-  <a class="mobile-menu-link" href="add-child.html">Add Child</a>
-</div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a class="mobile-menu-link" href="home.html">Home</a>
+    <a class="mobile-menu-link" href="about.html">About</a>
+    <a class="mobile-menu-link" href="pricing.html">Pricing</a>
+    <a class="mobile-menu-link" href="classes.html">Classes</a>
+    <a class="mobile-menu-cta" href="register.html">Get Started →</a>
+    <a class="mobile-menu-link" href="login.html" data-auth="guest">Log in</a>
+    <a class="mobile-menu-link" href="dashboard.html" data-auth="user">Dashboard</a>
+    <button class="mobile-menu-link" data-auth="user" onclick="APP.logout()"
+      style="background:none;border:none;text-align:left;cursor:pointer;width:100%">Log out</button>
+  </div>
 
 <div class="container" style="max-width:860px;padding-top:52px;padding-bottom:80px">
 
@@ -101,6 +106,7 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="../js/api.js"></script>
 <script src="../js/app.js"></script>
 <script src="../js/nav.js"></script>
 <script src="../js/dashboard.js"></script>
